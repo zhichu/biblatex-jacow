@@ -1,0 +1,26 @@
+\documentclass{article}
+
+\usepackage[style=jacow,language=jacow,sorting=none,maxnames=6,minnames=1]{biblatex}
+\usepackage{verbatim}
+
+\addbibresource{jacow-sample.bib}
+
+\begin{document}
+
+A normal paper in a proceedings\cite{klaproth:ipac2022-mopopt018}, and the first author will be kept when there're more than 6 authors\cite{funakoshi:ipac2022-moplxgd1}. An unpublished paper can use \verb|atevent| or \verb|atconf| in the \verb|type| field of an \verb|@unpublished| entry\cite{lin:ipac2022-moiygd2}, or directly use the \verb|@atevent| or \verb|@atconf| entry\cite{loisch:ipac2022-mooygd1}. Contributions to this conference may set \verb|type| to either \verb|thisevent| or \verb|thisconf| as an \verb|@unpublished| entry\cite{cook:ipac2022-mopopt067}, or directly use the \verb|@thisevent| or \verb|@thisconf| entry\cite{edelen:ipac2022-moiysp1}.
+
+Published article\cite{baker:nature-533-452,PhysRevSTAB.17.112801,PhysRevSTAB.17.112803}. Unpublished article\cite{chen:arxiv:1309.2353,author:fake-paper,author:fake-unfinished-paper}.
+
+A book\cite{wiedemann:particle-accelerator-physics}, even a chapter in a book\cite{forest:beam-dynamics:ch3}
+
+Technical report\cite{herr:cern-2014-009.157}.
+
+PhD thesis\cite{fol:cern-thesis-2021-261}.
+
+Manual\cite{ieee-style}.
+
+A fake discussion\cite{fake-discussion} and a fake patent\cite{fake-patent}.
+
+\printbibliography
+
+\end{document}
