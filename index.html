@@ -1,0 +1,1671 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-03-31 Sun 18:49 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bibliography Style for JACoW</title>
+<meta name="author" content="Zhichu Chen" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Bibliography Style for JACoW</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org4d195cd">1. Configure</a>
+<ul>
+<li><a href="#org6af5488">1.1. bbx</a></li>
+<li><a href="#orga875463">1.2. cbx</a></li>
+<li><a href="#org538e1aa">1.3. lbx</a></li>
+</ul>
+</li>
+<li><a href="#org05639bf">2. JACoW biblatex style</a>
+<ul>
+<li><a href="#org35f5fa4">2.1. Do not use US punctuation</a></li>
+<li><a href="#org97fc593">2.2. Redefine how to print date</a></li>
+<li><a href="#orgd96ea8b">2.3. Place doi</a></li>
+<li><a href="#orga4cbdbe">2.4. Print first defined field</a></li>
+<li><a href="#orga64180a">2.5. Copyright©</a></li>
+<li><a href="#org3efdd30">2.6. Identification</a></li>
+<li><a href="#org4aebc73">2.7. Initialisation</a></li>
+<li><a href="#org6a003b5">2.8. Drivers</a>
+<ul>
+<li><a href="#orgc3fa7be">2.8.1. inproceedings</a></li>
+<li><a href="#orgc505106">2.8.2. unpublished</a></li>
+<li><a href="#org534ec71">2.8.3. article</a></li>
+<li><a href="#org1c42162">2.8.4. inbook</a></li>
+<li><a href="#org39970f3">2.8.5. book</a></li>
+<li><a href="#orgcebd94b">2.8.6. report</a></li>
+<li><a href="#orgf980cdf">2.8.7. thesis</a></li>
+<li><a href="#orgd60c175">2.8.8. <span class="todo TODO">TODO</span> manual</a></li>
+<li><a href="#orgce377f3">2.8.9. patent</a></li>
+</ul>
+</li>
+<li><a href="#org0b8db8a">2.9. Fields</a>
+<ul>
+<li><a href="#org31a9cab">2.9.1. <i>et al.</i></a></li>
+<li><a href="#orged151b3">2.9.2. [title]</a></li>
+<li><a href="#org461f033">2.9.3. [maintitle]/[booktitle]</a></li>
+<li><a href="#org8c0fa95">2.9.4. paper [eid]</a></li>
+<li><a href="#org38f82c3">2.9.5. [doi]</a></li>
+<li><a href="#org5339edb">2.9.6. [url]</a></li>
+</ul>
+</li>
+<li><a href="#orgc6fe52c">2.10. Macros</a></li>
+</ul>
+</li>
+<li><a href="#orga40200a">3. Samples</a>
+<ul>
+<li><a href="#org625fe00">3.1. Conference</a>
+<ul>
+<li><a href="#org1c0f5ad">3.1.1. Published in previous proceedings</a></li>
+<li><a href="#orgf037d0b">3.1.2. Presented as a poster or slides only</a></li>
+<li><a href="#org6d4e0ba">3.1.3. Presented at this conference</a></li>
+</ul>
+</li>
+<li><a href="#org0ce31c8">3.2. Journal</a>
+<ul>
+<li><a href="#orgd7a6921">3.2.1. Published article</a></li>
+<li><a href="#org694dd37">3.2.2. Article accepted by a periodical</a></li>
+<li><a href="#orgbc76229">3.2.3. Article submitted to a periodical</a></li>
+<li><a href="#org39a90b2">3.2.4. Article not even submitted</a></li>
+</ul>
+</li>
+<li><a href="#orgabd953c">3.3. Book</a>
+<ul>
+<li><a href="#org30685ce">3.3.1. Chapter in book</a></li>
+<li><a href="#org371cbca">3.3.2. A complete book</a></li>
+</ul>
+</li>
+<li><a href="#orgcf1bcb4">3.4. Report</a></li>
+<li><a href="#org30e54b2">3.5. Thesis</a>
+<ul>
+<li><a href="#orga247b4a">3.5.1. PhD thesis</a></li>
+</ul>
+</li>
+<li><a href="#orgabeacf5">3.6. Manual</a></li>
+<li><a href="#orgb34e0a3">3.7. Private communication</a></li>
+<li><a href="#org7cd74a8">3.8. Patent</a></li>
+</ul>
+</li>
+<li><a href="#org0be0a80">4. Reference</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4d195cd" class="outline-2">
+<h2 id="org4d195cd"><span class="section-number-2">1.</span> Configure</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org6af5488" class="outline-3">
+<h3 id="org6af5488"><span class="section-number-3">1.1.</span> bbx</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #7f0000; font-style: italic;">%% </span><span style="color: #7f0000; font-style: italic;">&lt;&lt;copy-right&gt;&gt;</span>
+
+<span style="color: #721045;">\ProvidesExplFile</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {jacow.bbx}
+  {2024/03/21}
+  {0.01}
+  {JACoW biblatex bibliography style} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+<span style="color: #721045;">\RequireBibliographyStyle</span>{numeric-comp}
+
+&lt;&lt;ident&gt;&gt;
+
+&lt;&lt;init&gt;&gt;
+
+&lt;&lt;dm-fld&gt;&gt;
+
+&lt;&lt;dm-entry&gt;&gt;
+
+&lt;&lt;drv&gt;&gt;
+
+<span style="color: #721045;">\DeclareSourcemap</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\maps</span>[datatype=bibtex] <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+      {
+        &lt;&lt;drv-sourcemap&gt;&gt;
+      } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+&lt;&lt;fld&gt;&gt;
+
+&lt;&lt;mac&gt;&gt;
+
+<span style="color: #005e8b;">\endinput</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga875463" class="outline-3">
+<h3 id="orga875463"><span class="section-number-3">1.2.</span> cbx</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #7f0000; font-style: italic;">%% </span><span style="color: #7f0000; font-style: italic;">&lt;&lt;copy-right&gt;&gt;</span>
+
+<span style="color: #721045;">\ProvidesExplFile</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {jacow.cbx}
+  {2024/03/21}
+  {0.01}
+  {JACoW biblatex citation style} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+<span style="color: #721045;">\RequireCitationStyle</span>{numeric-comp}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org538e1aa" class="outline-3">
+<h3 id="org538e1aa"><span class="section-number-3">1.3.</span> lbx</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #7f0000; font-style: italic;">%% </span><span style="color: #7f0000; font-style: italic;">&lt;&lt;copy-right&gt;&gt;</span>
+
+<span style="color: #721045;">\ProvidesExplFile</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {jacow.lbx}
+  {2024/03/21}
+  {0.01}
+  {JACoW biblatex localisation style} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+<span style="color: #721045;">\InheritBibliographyExtras</span>{english}
+
+<span style="color: #721045;">\DeclareBibliographyExtras</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    &lt;&lt;decl-bibextra&gt;&gt;
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+&lt;&lt;new-bibstring&gt;&gt;
+
+<span style="color: #721045;">\DefineBibliographyStrings</span>{english} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    &lt;&lt;def-bibstring&gt;&gt;
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+<span style="color: #721045;">\DeclareBibliographyStrings</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    inherit      = {english},
+    &lt;&lt;decl-bibstring&gt;&gt;
+    september    = {{September}{Sep<span style="color: #721045;">\adddot</span>}},
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+<span style="color: #005e8b;">\endinput</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org05639bf" class="outline-2">
+<h2 id="org05639bf"><span class="section-number-2">2.</span> JACoW biblatex style</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org35f5fa4" class="outline-3">
+<h3 id="org35f5fa4"><span class="section-number-3">2.1.</span> Do not use US punctuation</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #005e8b;">\stdpunctuation</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org97fc593" class="outline-3">
+<h3 id="org97fc593"><span class="section-number-3">2.2.</span> Redefine how to print date</h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\newrobustcmd</span>*{<span style="color: #721045;">\mkdaterangejacow</span>}[1] <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\iffieldundef</span>{#1year}
+      <span style="color: #7f0000; font-style: italic;">%%%% </span><span style="color: #7f0000; font-style: italic;">year not defined</span>
+      {
+        <span style="color: #721045;">\iffieldundef</span>{#1endyear}
+          <span style="color: #7f0000; font-style: italic;">%%% </span><span style="color: #7f0000; font-style: italic;">endyear not defined</span>
+          {}
+          <span style="color: #7f0000; font-style: italic;">%%% </span><span style="color: #7f0000; font-style: italic;">endyear defined, let's pretend year==endyear</span>
+          {
+            <span style="color: #721045;">\iffieldundef</span>{#1month}
+              <span style="color: #7f0000; font-style: italic;">%% </span><span style="color: #7f0000; font-style: italic;">month not defined</span>
+              {
+                <span style="color: #721045;">\iffieldundef</span>{#1endmonth}
+                  <span style="color: #7f0000; font-style: italic;">% endmonth not defined</span>
+                  {<span style="color: #721045;">\printfield</span>{#1endyear}}
+                  <span style="color: #7f0000; font-style: italic;">% endmonth defined, let's pretend month==endmonth</span>
+                  {<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1endmonth}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1endyear}} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+              }
+              <span style="color: #7f0000; font-style: italic;">%% </span><span style="color: #7f0000; font-style: italic;">month defined</span>
+              {
+                <span style="color: #721045;">\iffieldundef</span>{#1endmonth}
+                  <span style="color: #7f0000; font-style: italic;">% endmonth not defined, let's pretend month==endmonth</span>
+                  {<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1month}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1endyear}}
+                  <span style="color: #7f0000; font-style: italic;">% endmonth defined</span>
+                  {
+                    <span style="color: #721045;">\iffieldsequal</span>{#1month}{#1endmonth}
+                      {<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1month}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1endyear}}
+                      {<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1month}}--<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1endmonth}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1endyear}} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+                  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+              } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+          } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+      }
+      <span style="color: #7f0000; font-style: italic;">%%%% </span><span style="color: #7f0000; font-style: italic;">year defined</span>
+      {
+        <span style="color: #721045;">\iffieldundef</span>{#1endyear}
+          <span style="color: #7f0000; font-style: italic;">%%% </span><span style="color: #7f0000; font-style: italic;">endyear not defined, let's pretend year==endyear</span>
+          {
+            <span style="color: #721045;">\iffieldundef</span>{#1month}
+              <span style="color: #7f0000; font-style: italic;">%% </span><span style="color: #7f0000; font-style: italic;">month not defined</span>
+              {
+                <span style="color: #721045;">\iffieldundef</span>{#1endmonth}
+                  <span style="color: #7f0000; font-style: italic;">% endmonth not defined</span>
+                  {<span style="color: #721045;">\printfield</span>{#1year}}
+                  <span style="color: #7f0000; font-style: italic;">% endmonth defined, let's pretend month==endmonth</span>
+                  {<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1endmonth}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1year}} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+              }
+              <span style="color: #7f0000; font-style: italic;">%% </span><span style="color: #7f0000; font-style: italic;">month defined</span>
+              {
+                <span style="color: #721045;">\iffieldundef</span>{#1endmonth}
+                  <span style="color: #7f0000; font-style: italic;">% endmonth not defined, let's pretend month==endmonth</span>
+                  {<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1month}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1year}}
+                  <span style="color: #7f0000; font-style: italic;">% endmonth defined</span>
+                  {
+                    <span style="color: #721045;">\iffieldsequal</span>{#1month}{#1endmonth}
+                      {<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1month}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1year}}
+                      {<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1month}}--<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1endmonth}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1year}} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+                  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+              } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+          }
+          <span style="color: #7f0000; font-style: italic;">%%% </span><span style="color: #7f0000; font-style: italic;">endyear defined</span>
+          {
+            <span style="color: #721045;">\iffieldsequal</span>{#1year}{#1endyear}
+              {
+                <span style="color: #721045;">\iffieldundef</span>{#1month}
+                  <span style="color: #7f0000; font-style: italic;">%% </span><span style="color: #7f0000; font-style: italic;">month not defined</span>
+                  {
+                    <span style="color: #721045;">\iffieldundef</span>{#1endmonth}
+                      <span style="color: #7f0000; font-style: italic;">% endmonth not defined</span>
+                      {<span style="color: #721045;">\printfield</span>{#1year}}
+                      <span style="color: #7f0000; font-style: italic;">% endmonth defined, let's pretend month==endmonth</span>
+                      {<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1endmonth}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1year}} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+                  }
+                  <span style="color: #7f0000; font-style: italic;">%% </span><span style="color: #7f0000; font-style: italic;">month defined</span>
+                  {
+                    <span style="color: #721045;">\iffieldundef</span>{#1endmonth}
+                      <span style="color: #7f0000; font-style: italic;">% endmonth not defined, let's pretend month==endmonth</span>
+                      {<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1month}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1year}}
+                      <span style="color: #7f0000; font-style: italic;">% endmonth defined</span>
+                      {
+                        <span style="color: #721045;">\iffieldsequal</span>{#1month}{#1endmonth}
+                          {<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1month}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1year}}
+                          {<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1month}}--<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1endmonth}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1year}} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+                      } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+                  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+              }
+              {
+                <span style="color: #721045;">\iffieldundef</span>{#1month}
+                  <span style="color: #7f0000; font-style: italic;">%% </span><span style="color: #7f0000; font-style: italic;">month not defined</span>
+                  {
+                    <span style="color: #721045;">\printfield</span>{#1year}--<span style="color: #721045;">\printfield</span>{#1endyear}
+                  }
+                  <span style="color: #7f0000; font-style: italic;">%% </span><span style="color: #7f0000; font-style: italic;">month defined</span>
+                  {
+                    <span style="color: #721045;">\iffieldundef</span>{#1endmonth}
+                      <span style="color: #7f0000; font-style: italic;">% endmonth not defined</span>
+                      {
+                        <span style="color: #721045;">\printfield</span>{#1year}--<span style="color: #721045;">\printfield</span>{#1endyear}
+                      }
+                      <span style="color: #7f0000; font-style: italic;">% endmonth defined</span>
+                      {
+                        <span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1month}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1year}--<span style="color: #721045;">\mkbibmonth</span>{<span style="color: #721045;">\thefield</span>{#1endmonth}}<span style="color: #721045;">\space</span><span style="color: #005e8b;">\printfield</span>{#1endyear}
+                      } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+                  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+              } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+          } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+      } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+  }
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\protected</span><span style="color: #005e8b;">\csedef</span>{blx@imc@printdate}     {<span style="color: #721045;">\noexpand</span><span style="color: #005e8b;">\csuse</span>{mkdaterangejacow}{}}
+<span style="color: #721045;">\protected</span><span style="color: #005e8b;">\csedef</span>{blx@imc@printeventdate}{<span style="color: #721045;">\noexpand</span><span style="color: #005e8b;">\csuse</span>{mkdaterangejacow}{event}}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd96ea8b" class="outline-3">
+<h3 id="orgd96ea8b"><span class="section-number-3">2.3.</span> Place doi</h3>
+<div class="outline-text-3" id="text-2-3">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\cs_new:Npn</span> <span style="color: #005e8b;">\put_doi:n</span> #1
+{
+  <span style="color: #721045;">\ifvmode</span>
+    <span style="color: #721045;">\leavevmode</span>
+  <span style="color: #721045;">\fi</span>
+  <span style="color: #721045;">\unskip</span>
+  <span style="color: #721045;">\ifhmode</span>
+    <span style="color: #721045;">\predisplaypenalty</span>     10000<span style="color: #721045;">\relax</span>
+    <span style="color: #721045;">\postdisplaypenalty</span>    10000<span style="color: #721045;">\relax</span>
+    <span style="color: #721045;">\abovedisplayskip</span>      -<span style="color: #721045;">\baselineskip</span>
+    <span style="color: #721045;">\belowdisplayskip</span>      -<span style="color: #721045;">\baselineskip</span>
+    <span style="color: #721045;">\abovedisplayshortskip</span> <span style="color: #721045;">\abovedisplayskip</span>
+    <span style="color: #721045;">\belowdisplayshortskip</span> <span style="color: #721045;">\belowdisplayskip</span>
+    <span style="color: #3548cf;">$$</span>
+    <span style="color: #721045;">\global</span> <span style="color: #721045;">\dimen</span>0=<span style="color: #721045;">\dimexpr</span> <span style="color: #721045;">\predisplaysize</span> -2em <span style="color: #721045;">\relax</span>
+    <span style="color: #3548cf;">$$</span>
+    <span style="color: #721045;">\count</span>0 <span style="color: #721045;">\prevgraf</span>
+    <span style="color: #721045;">\advance</span>  <span style="color: #721045;">\count</span>0 by -3
+    <span style="color: #721045;">\advance</span>  <span style="color: #721045;">\count</span>0 by -1
+    <span style="color: #721045;">\prevgraf</span> <span style="color: #721045;">\count</span>0
+  <span style="color: #721045;">\fi</span>
+  <span style="color: #721045;">\noindent</span> <span style="color: #721045;">\kern</span> <span style="color: #721045;">\dimexpr</span> <span style="color: #721045;">\dimen</span>0 - <span style="color: #721045;">\@totalleftmargin</span> <span style="color: #721045;">\relax</span>
+  <span style="color: #721045;">\setbox</span>0=<span style="color: #721045;">\hbox</span>{<span style="color: #721045;">\space</span>#1}<span style="color: #7f0000; font-style: italic;">%</span>
+  <span style="color: #721045;">\ifdim</span> <span style="color: #721045;">\dimexpr</span> <span style="color: #721045;">\hsize</span>-<span style="color: #721045;">\dimen</span>0 <span style="color: #721045;">\relax</span> &lt; <span style="color: #721045;">\wd</span>0
+    <span style="color: #721045;">\newline</span>
+  <span style="color: #721045;">\else</span>
+    <span style="color: #721045;">\space</span>
+  <span style="color: #721045;">\fi</span>
+  {#1}
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\tl_new:N</span> <span style="color: #005e8b;">\l_doi_tl</span>
+<span style="color: #005e8b;">\str_new:N</span> <span style="color: #005e8b;">\l_doi:_str</span>
+<span style="color: #005e8b;">\str_new:N</span> <span style="color: #005e8b;">\l_doi_str</span>
+<span style="color: #005e8b;">\str_new:N</span> <span style="color: #005e8b;">\l_prefix_str</span>
+<span style="color: #005e8b;">\str_new:N</span> <span style="color: #005e8b;">\l_vol_str</span>
+<span style="color: #005e8b;">\str_gset:Nn</span> <span style="color: #005e8b;">\l_doi:_str</span> { doi: }
+<span style="color: #721045;">\DeclareDocumentCommand</span>{<span style="color: #721045;">\doi</span>}{sd&lt;&gt;om}
+{
+  <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_doi_str</span> { #4 }
+  <span style="color: #721045;">\IfBooleanTF</span> {#1}
+  {
+    <span style="color: #721045;">\IfValueTF</span>{#2}
+    {
+      <span style="color: #005e8b;">\str_case_e:nn</span> { <span style="color: #005e8b;">\str_foldcase:n</span> { #2 } }
+      {
+        { jacow } { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_doi_str</span> {doi&lt;jacow&gt;[event&amp;year]{paper}} }
+        { arxiv } { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_doi_str</span> {doi&lt;arxiv&gt;[2-digit-year&amp;month]{paper}} }
+        { prl }   { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_doi_str</span> {doi&lt;prl&gt;[vol]{page} ~ where ~ the ~ first ~ two ~ digits ~ of ~ &#8220;page&#8221; ~ is ~ issue ~ number} }
+        { prab }  { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_doi_str</span> {doi&lt;prab&gt;[vol]{page} ~ where ~ the ~ first ~ two ~ digits ~ of ~ &#8220;page&#8221; ~ is ~ issue ~ number} }
+        { nima }  { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_doi_str</span> {doi&lt;nima&gt;[year]{page}} }
+        { ieee/access }  { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_doi_str</span> {doi&lt;ieee/access&gt;[year]{magicnumber}} }
+        { mpid/sensors } { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_doi_str</span> {doi&lt;mpid/sensors&gt;[vol&amp;no]{page}} }
+      }
+      <span style="color: #005e8b;">\str_concat:NNN</span> <span style="color: #005e8b;">\l_doi_str</span> <span style="color: #005e8b;">\c_backslash_str</span> <span style="color: #005e8b;">\l_doi_str</span>
+    }
+    {
+      <span style="color: #005e8b;">\str_concat:NNN</span> <span style="color: #005e8b;">\l_doi_str</span> <span style="color: #005e8b;">\l_doi:_str</span> <span style="color: #005e8b;">\l_doi_str</span>
+    }
+  }
+  {
+    <span style="color: #005e8b;">\regex_replace_once:NnN</span> <span style="color: #005e8b;">\l_http_doi_org_regex</span> { \1 } <span style="color: #005e8b;">\l_doi_str</span>
+    <span style="color: #005e8b;">\regex_replace_once:NnN</span> <span style="color: #005e8b;">\l_doi:_regex</span>         { \1 } <span style="color: #005e8b;">\l_doi_str</span>
+    <span style="color: #721045;">\IfValueT</span>{#2}
+    {
+      <span style="color: #005e8b;">\str_case_e:nn</span> { <span style="color: #005e8b;">\str_foldcase:n</span> { #2 } }
+      {
+        { jacow }        { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_prefix_str</span> {10.18429/JACoW-}            <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_vol_str</span> {#3-} }
+        { arxiv }        { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_prefix_str</span> {10.48550/arXiv.}            <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_vol_str</span> {#3.} }
+        { prl }          { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_prefix_str</span> {10.1103/PhysRevLett.}       <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_vol_str</span> {#3.} }
+        { prab }         { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_prefix_str</span> {10.1103/PhysRevAccelBeams.} <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_vol_str</span> {#3.} }
+        { nima }         { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_prefix_str</span> {10.1016/j.nima.}            <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_vol_str</span> {#3.} }
+        { ieee/access }  { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_prefix_str</span> {10.1109/ACCESS.}            <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_vol_str</span> {#3.} }
+        { mpid/sensors } { <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_prefix_str</span> {10.3390/s}                  <span style="color: #005e8b;">\str_set:Nn</span> <span style="color: #005e8b;">\l_vol_str</span> {#3}  }
+      }
+      <span style="color: #721045;">\IfValueT</span>{#3}
+      {
+        <span style="color: #005e8b;">\str_concat:NNN</span> <span style="color: #005e8b;">\l_prefix_str</span> <span style="color: #005e8b;">\l_prefix_str</span> <span style="color: #005e8b;">\l_vol_str</span>
+      }
+      <span style="color: #005e8b;">\str_concat:NNN</span> <span style="color: #005e8b;">\l_doi_str</span> <span style="color: #005e8b;">\l_prefix_str</span> <span style="color: #005e8b;">\l_doi_str</span>
+    }
+    <span style="color: #005e8b;">\regex_replace_once:NnN</span> <span style="color: #005e8b;">\l_doi:jacow_regex</span>         { \1 JACoW <span style="color: #721045;">\c</span>{str_uppercase:n} <span style="color: #721045;">\cB</span>\{ \3 <span style="color: #721045;">\cE</span>\}  } <span style="color: #005e8b;">\l_doi_str</span>
+    <span style="color: #005e8b;">\str_concat:NNN</span> <span style="color: #005e8b;">\l_doi_str</span> <span style="color: #005e8b;">\l_doi:_str</span> <span style="color: #005e8b;">\l_doi_str</span>
+  }
+  <span style="color: #005e8b;">\put_doi:n</span> { <span style="color: #721045;">\tt</span> <span style="color: #005e8b;">\l_doi_str</span> }
+}
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #005e8b;">\regex_new:N</span> <span style="color: #005e8b;">\l_http_doi_org_regex</span>
+<span style="color: #005e8b;">\regex_new:N</span> <span style="color: #005e8b;">\l_doi:_regex</span>
+<span style="color: #005e8b;">\regex_new:N</span> <span style="color: #005e8b;">\l_doi:jacow_regex</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #005e8b;">\regex_set:Nn</span> <span style="color: #005e8b;">\l_http_doi_org_regex</span> { <span style="color: #721045;">\A</span> .*doi.org/(10\.) }
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #005e8b;">\regex_set:Nn</span> <span style="color: #005e8b;">\l_doi:_regex</span> { .*doi:<span style="color: #721045;">\s</span>*(10\.) }
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #005e8b;">\regex_set:Nn</span> <span style="color: #005e8b;">\l_doi:jacow_regex</span> { (10.18429/)((?i)jacow)(.*) }
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga4cbdbe" class="outline-3">
+<h3 id="orga4cbdbe"><span class="section-number-3">2.4.</span> Print first defined field</h3>
+<div class="outline-text-3" id="text-2-4">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\NewDocumentCommand</span><span style="color: #005e8b;">\printfirst</span>{omo} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\clist_map_inline:nn</span> {#2} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+      {
+        <span style="color: #721045;">\iffieldundef</span>{##1}
+          {}
+          {
+            <span style="color: #721045;">\IfValueT</span>{#1}{<span style="color: #721045;">\printtext</span>{#1}}
+            <span style="color: #721045;">\printfield</span>{##1}
+            <span style="color: #721045;">\IfValueT</span>{#3}{<span style="color: #721045;">\printtext</span>{#3}}
+            <span style="color: #721045;">\clist_map_break:</span>
+          } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+      } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\NewDocumentCommand</span><span style="color: #005e8b;">\printfirstlist</span>{omo} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\clist_map_inline:nn</span> {#2} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+      {
+        <span style="color: #721045;">\iffieldundef</span>{##1}
+          {}
+          {
+            <span style="color: #721045;">\IfValueT</span>{#1}{<span style="color: #721045;">\printtext</span>{#1}}
+            <span style="color: #721045;">\printlist</span>{##1}
+            <span style="color: #721045;">\IfValueT</span>{#3}{<span style="color: #721045;">\printtext</span>{#3}}
+            <span style="color: #721045;">\clist_map_break:</span>
+          } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+      } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga64180a" class="outline-3">
+<h3 id="orga64180a"><span class="section-number-3">2.5.</span> Copyright©</h3>
+<div class="outline-text-3" id="text-2-5">
+<div class="org-src-container">
+<pre class="src src-latex3">biblatex-jacow --- A biblatex implementation of the
+&#171;
+  JACoW bibliography style
+&#187;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3efdd30" class="outline-3">
+<h3 id="org3efdd30"><span class="section-number-3">2.6.</span> Identification</h3>
+<div class="outline-text-3" id="text-2-6">
+</div>
+</div>
+
+<div id="outline-container-org4aebc73" class="outline-3">
+<h3 id="org4aebc73"><span class="section-number-3">2.7.</span> Initialisation</h3>
+<div class="outline-text-3" id="text-2-7">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\renewcommand</span>*<span style="color: #721045;">\bibnamedash</span>{<span style="color: #721045;">\textemdash</span><span style="color: #005e8b;">\textemdash</span>}
+<span style="color: #721045;">\renewcommand</span>*<span style="color: #721045;">\intitlepunct</span>{<span style="color: #721045;">\addspace</span>}
+<span style="color: #721045;">\renewcommand</span>*<span style="color: #721045;">\newunitpunct</span>{<span style="color: #721045;">\addcomma</span><span style="color: #005e8b;">\addspace</span>}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org6a003b5" class="outline-3">
+<h3 id="org6a003b5"><span class="section-number-3">2.8.</span> Drivers</h3>
+<div class="outline-text-3" id="text-2-8">
+</div>
+
+
+<div id="outline-container-orgc3fa7be" class="outline-4">
+<h4 id="orgc3fa7be"><span class="section-number-4">2.8.1.</span> inproceedings</h4>
+<div class="outline-text-4" id="text-2-8-1">
+<p>
+The expected result will look like this:
+</p>
+<ul class="org-ul">
+<li>[Author], “[Paper title]”, in <i>[Proc. Event]</i>, [venue], [date], paper [eid]. p. [page]. <code>doi:10.[xxx/yyy/zzz]</code></li>
+<li>[Author], “[Paper title]”, in <i>[Proc. Event]</i>, [venue], [date], paper [eid]. pp. [pages]. <code>doi:10.[xxx/yyy/zzz]</code></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-latex3">
+<span style="color: #721045;">\DeclareBibliographyDriver</span>{inproceedings} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\usebibmacro</span>{bibindex}
+    <span style="color: #721045;">\usebibmacro</span>{begentry} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+      <span style="color: #721045;">\usebibmacro</span>{author}
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\labelnamepunct</span>}<span style="color: #721045;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{title}
+      <span style="color: #721045;">\newunit</span>
+      <span style="color: #721045;">\printfirst</span>{maintitle,booktitle}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printfield</span>{venue}
+      <span style="color: #721045;">\newunit</span>
+      <span style="color: #721045;">\usebibmacro</span>{eventdate/date/mon.year}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printfield</span>{eid}
+      <span style="color: #721045;">\newunit</span>
+      <span style="color: #721045;">\printfield</span>{pages}
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\addperiod</span><span style="color: #005e8b;">\addspace</span>}<span style="color: #721045;">\newblock</span>
+      <span style="color: #721045;">\printfirst</span>{doi,eprint,url} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+    <span style="color: #721045;">\usebibmacro</span>{finentry}
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+</pre>
+</div>
+</div>
+
+
+
+<ol class="org-ol">
+<li><a id="orgef4f49b"></a>[date]<br />
+<div class="outline-text-5" id="text-2-8-1-1">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\newbibmacro</span>*{eventdate/date/mon.year} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\iffieldundef</span>{eventyear}
+      {
+        <span style="color: #721045;">\usebibmacro</span>{date}<span style="color: #7f0000; font-style: italic;">%</span>
+      }
+      {
+        <span style="color: #721045;">\usebibmacro</span>{eventdate}
+      }<span style="color: #7f0000; font-style: italic;">%&#187;</span>
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\renewbibmacro</span>*{date}     {<span style="color: #721045;">\printdate</span>}
+<span style="color: #721045;">\newbibmacro</span>*  {eventdate}{<span style="color: #721045;">\printeventdate</span>}
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgc505106" class="outline-4">
+<h4 id="orgc505106"><span class="section-number-4">2.8.2.</span> unpublished</h4>
+<div class="outline-text-4" id="text-2-8-2">
+<p>
+The expected result will look like this:
+</p>
+<ul class="org-ul">
+<li>[Author], “[Paper title]”, presented at the [Event], [venue], [date], paper [eid], unpublished.</li>
+<li>[Author], “[Paper title]”, presented at the [Event], [venue], [date], paper [eid], this conference.</li>
+<li>[Author], “[Paper title]”, <i>[Journal]</i>, to be published.</li>
+<li>[Author], “[Paper title]”, submitted for publication.</li>
+<li>[Author], “[Paper title]”, unpublished.</li>
+<li>[Author], private communication, [date].</li>
+</ul>
+
+
+
+<div class="org-src-container">
+<pre class="src src-latex3">
+<span style="color: #721045;">\DeclareBibliographyDriver</span>{unpublished} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\usebibmacro</span>{bibindex}
+    <span style="color: #721045;">\usebibmacro</span>{begentry} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+      <span style="color: #721045;">\usebibmacro</span>{author}
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\labelnamepunct</span>}<span style="color: #721045;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{title}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{event/journal}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printfield</span>{eid}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{type}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{private+date}
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\addperiod</span><span style="color: #005e8b;">\addspace</span>}<span style="color: #721045;">\newblock</span>
+      <span style="color: #721045;">\printfirst</span>{doi,eprint,url} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+    <span style="color: #721045;">\usebibmacro</span>{finentry}
+  }  <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\clist_const:Nn</span> <span style="color: #005e8b;">\l_jacow_unpublished_types</span> {atevent,atconf,thisevent,thisconf,submitted,submittedto,private}
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\map</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\step</span>[typesource=atevent,   typetarget=unpublished,final]
+    <span style="color: #721045;">\step</span>[fieldset=type,        fieldvalue=atevent]
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+<span style="color: #721045;">\map</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\step</span>[typesource=atconf,    typetarget=unpublished,final]
+    <span style="color: #721045;">\step</span>[fieldset=type,        fieldvalue=atevent]
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+<span style="color: #721045;">\map</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\step</span>[typesource=thisevent, typetarget=unpublished,final]
+    <span style="color: #721045;">\step</span>[fieldset=type,        fieldvalue=thisevent]
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+<span style="color: #721045;">\map</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\step</span>[typesource=thisconf,  typetarget=unpublished,final]
+    <span style="color: #721045;">\step</span>[fieldset=type,        fieldvalue=thisevent]
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+<span style="color: #721045;">\map</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\step</span>[typesource=submitted, typetarget=unpublished,final]
+    <span style="color: #721045;">\step</span>[fieldset=type,        fieldvalue=submitted]
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+<span style="color: #721045;">\map</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\step</span>[typesource=submittedto, typetarget=unpublished,final]
+    <span style="color: #721045;">\step</span>[fieldset=type,          fieldvalue=submittedto]
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+<span style="color: #721045;">\map</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\step</span>[typesource=private,     typetarget=unpublished,final]
+    <span style="color: #721045;">\step</span>[fieldset=type,          fieldvalue=private]
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+</pre>
+</div>
+</div>
+
+
+
+<ol class="org-ol">
+<li><a id="org46d6c9f"></a>Event or Journal<br />
+<div class="outline-text-5" id="text-2-8-2-1">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\newbibmacro</span>*{event/journal} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\iffieldundef</span>{eventtitle}
+      {
+        <span style="color: #721045;">\iffieldundef</span>{journaltitle}
+          {}
+          {
+            <span style="color: #721045;">\printfield</span>{journaltitle}
+          } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+      }
+      {
+        <span style="color: #721045;">\printtext</span>{presented ~ at ~ the}<span style="color: #721045;">\addspace</span>
+        <span style="color: #721045;">\printfield</span>{eventtitle}
+        <span style="color: #721045;">\newunit</span>
+        <span style="color: #721045;">\printfield</span>{venue}
+        <span style="color: #721045;">\newunit</span>
+        <span style="color: #721045;">\usebibmacro</span>{eventdate/date/mon.year}
+      } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+</pre>
+</div>
+</div>
+</li>
+
+
+<li><a id="orge735c87"></a>type<br />
+<div class="outline-text-5" id="text-2-8-2-2">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\clist_map_inline:Nn</span> <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  <span style="color: #005e8b;">\l_jacow_unpublished_types</span>
+  {
+    <span style="color: #721045;">\NewBibliographyString</span>{#1}
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-latex3">atevent     = unpublished,
+atconf      = unpublished,
+submitted   = submitted<span style="color: #721045;">\addspace</span> for<span style="color: #721045;">\addspace</span> publication,
+submittedto = to<span style="color: #721045;">\addspace</span> be<span style="color: #721045;">\addspace</span> published,
+thisevent   = this<span style="color: #721045;">\addspace</span> conference,
+thisconf    = this<span style="color: #721045;">\addspace</span> conference,
+private     = private<span style="color: #721045;">\addspace</span> communication,
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\newbibmacro</span>*{type} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\iffieldundef</span>{type}
+      {
+        <span style="color: #721045;">\ifbibstring</span>{<span style="color: #721045;">\thefield</span>{entrytype}}
+          {<span style="color: #721045;">\printtext</span>{<span style="color: #721045;">\bibstring</span>{<span style="color: #721045;">\thefield</span>{entrytype}}}}
+          {
+            <span style="color: #721045;">\iffieldundef</span>{event}
+              {
+                <span style="color: #721045;">\iffieldundef</span>{journal}
+                  {
+                    <span style="color: #721045;">\printtext</span>{unpublished}
+                  }
+                  {
+                    <span style="color: #721045;">\printtext</span>{to ~ be ~ published}
+                  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+              }
+              {
+                <span style="color: #721045;">\printtext</span>{unpublished}
+              } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+          } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+      }
+      {
+        <span style="color: #721045;">\printfield</span>{type}
+      } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="orgae45425"></a>Private communication date<br />
+<div class="outline-text-5" id="text-2-8-2-3">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\newbibmacro</span>*{private+date} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\iffieldequalstr</span>{type}{private}
+      {<span style="color: #721045;">\printdate</span>}
+      {} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org534ec71" class="outline-4">
+<h4 id="org534ec71"><span class="section-number-4">2.8.3.</span> article</h4>
+<div class="outline-text-4" id="text-2-8-3">
+<p>
+Expected result will be like:
+</p>
+<ul class="org-ul">
+<li>[Author], “[Paper title]”, <i>[Journal]</i>, vol. [volume], no. [issue], p. [page], [date]. <code>doi:10.[xxx/yyy/zzz]</code></li>
+<li>[Author], “[Paper title]”, <i>[Journal]</i>, vol. [volume], no. [issue], pp. [pages], [date]. <code>doi:10.[xxx/yyy/zzz]</code></li>
+</ul>
+
+
+<div class="org-src-container">
+<pre class="src src-latex3">
+<span style="color: #721045;">\DeclareBibliographyDriver</span>{article} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\usebibmacro</span>{bibindex}
+    <span style="color: #721045;">\usebibmacro</span>{begentry} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+      <span style="color: #721045;">\usebibmacro</span>{author}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{title}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printfield</span>{journaltitle}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printfield</span>{volume}
+      <span style="color: #721045;">\newunit</span>
+      <span style="color: #721045;">\printfirst</span>{issue,number}
+      <span style="color: #721045;">\newunit</span>
+      <span style="color: #721045;">\printfield</span>{pages}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printdate</span>
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\addperiod</span><span style="color: #005e8b;">\addspace</span>}<span style="color: #721045;">\newblock</span>
+      <span style="color: #721045;">\printfirst</span>{doi,eprint,url} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+    <span style="color: #721045;">\usebibmacro</span>{finentry}
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+</pre>
+</div>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgfeee878"></a>vol. [volume]<br />
+<div class="outline-text-5" id="text-2-8-3-1">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\DeclareFieldFormat</span>[article,periodical]{volume}{<span style="color: #721045;">\bibstring</span>{volume}<span style="color: #721045;">\nobreakspace</span>#1}
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="orgdc807bc"></a>no. [issue]<br />
+<div class="outline-text-5" id="text-2-8-3-2">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\DeclareFieldFormat</span>[article,periodical]{issue}{<span style="color: #721045;">\bibstring</span>{number}<span style="color: #721045;">\nobreakspace</span>#1}
+<span style="color: #721045;">\DeclareFieldFormat</span>[article,periodical]{number}{<span style="color: #721045;">\bibstring</span>{number}<span style="color: #721045;">\nobreakspace</span>#1}
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org1c42162" class="outline-4">
+<h4 id="org1c42162"><span class="section-number-4">2.8.4.</span> inbook</h4>
+<div class="outline-text-4" id="text-2-8-4">
+<p>
+Expected result:
+</p>
+<ul class="org-ul">
+<li>[Author], “[Chapter title]”, in <i>[Book Title]</i>, [Editor] Ed. [Location]: [Publisher], [date], p. [page]. <code>doi:10.[xxx/yyy/zzz]</code></li>
+</ul>
+
+
+<div class="org-src-container">
+<pre class="src src-latex3">
+<span style="color: #721045;">\DeclareBibliographyDriver</span>{inbook} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\usebibmacro</span>{bibindex}
+    <span style="color: #721045;">\usebibmacro</span>{begentry} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+      <span style="color: #721045;">\usebibmacro</span>{author}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{title}
+      <span style="color: #721045;">\newunit</span>
+      <span style="color: #721045;">\printfirst</span>{maintitle,booktitle}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{byeditor}
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\addperiod</span><span style="color: #005e8b;">\addspace</span>}<span style="color: #721045;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{publisher+location+date}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printfield</span>{pages}
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\addperiod</span><span style="color: #005e8b;">\addspace</span>}<span style="color: #721045;">\newblock</span>
+      <span style="color: #721045;">\printfirst</span>{doi,eprint,url} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+    <span style="color: #721045;">\usebibmacro</span>{finentry}
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+</pre>
+</div>
+</div>
+
+<ol class="org-ol">
+<li><a id="orga35c5f0"></a>[Editor] Ed.<br />
+<div class="outline-text-5" id="text-2-8-4-1">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\renewbibmacro</span>*{byeditor} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\ifnameundef</span>{editor}
+      {}
+      {
+        <span style="color: #721045;">\printnames</span>[byeditor]{editor}
+        <span style="color: #721045;">\addspace</span>
+        <span style="color: #721045;">\usebibmacro</span>{bytypestrg}{editor}{editor}
+      } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-latex3">byeditor = Ed<span style="color: #721045;">\adddot</span>,
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org39970f3" class="outline-4">
+<h4 id="org39970f3"><span class="section-number-4">2.8.5.</span> book</h4>
+<div class="outline-text-4" id="text-2-8-5">
+<p>
+Expected result:
+</p>
+<ul class="org-ul">
+<li>[Author], <i>[Book Title]</i>. [Location]: [Publisher], [date]. <code>doi:10.[xxx/yyy/zzz]</code></li>
+</ul>
+
+
+<div class="org-src-container">
+<pre class="src src-latex3">
+<span style="color: #721045;">\DeclareBibliographyDriver</span>{book} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\usebibmacro</span>{bibindex}
+    <span style="color: #721045;">\usebibmacro</span>{begentry} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+      <span style="color: #721045;">\usebibmacro</span>{author}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{title}
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\addperiod</span><span style="color: #005e8b;">\addspace</span>}<span style="color: #721045;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{publisher+location+date}
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\addperiod</span><span style="color: #005e8b;">\addspace</span>}<span style="color: #721045;">\newblock</span>
+      <span style="color: #721045;">\printfirst</span>{doi,eprint,url} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+    <span style="color: #721045;">\usebibmacro</span>{finentry}
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcebd94b" class="outline-4">
+<h4 id="orgcebd94b"><span class="section-number-4">2.8.6.</span> report</h4>
+<div class="outline-text-4" id="text-2-8-6">
+<p>
+Expected result:
+</p>
+<ul class="org-ul">
+<li>[Author], “[Report title]”, [institute], [address], Rep. [number], [date]. <code>doi:10.[xxx/yyy/zzz]</code></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-latex3">
+<span style="color: #721045;">\DeclareBibliographyDriver</span>{report} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\usebibmacro</span>{bibindex}
+    <span style="color: #721045;">\usebibmacro</span>{begentry} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+      <span style="color: #721045;">\usebibmacro</span>{author}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{title}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printlist</span>{institution}
+      <span style="color: #721045;">\newunit</span>
+      <span style="color: #721045;">\printlist</span>{location}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printfield</span>{type}
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\addspace</span>}
+      <span style="color: #721045;">\printfield</span>{number}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printdate</span>
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\addperiod</span><span style="color: #005e8b;">\addspace</span>}<span style="color: #721045;">\newblock</span>
+      <span style="color: #721045;">\printfirst</span>{doi,eprint,url} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+    <span style="color: #721045;">\usebibmacro</span>{finentry}
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+</pre>
+</div>
+</div>
+
+<ol class="org-ol">
+<li><a id="org1e981c8"></a>Rep. [number]<br />
+<div class="outline-text-5" id="text-2-8-6-1">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\DeclareFieldFormat</span>[report]{number}{#1}
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-latex3">techreport = Rep<span style="color: #721045;">\adddot</span>,
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgf980cdf" class="outline-4">
+<h4 id="orgf980cdf"><span class="section-number-4">2.8.7.</span> thesis</h4>
+<div class="outline-text-4" id="text-2-8-7">
+<p>
+Expected result:
+</p>
+<ul class="org-ul">
+<li>[Author], “[Title of thesis]”, Ph.D. thesis, [Institute], [address], [date]. <code>doi:10.[xxx/yyy/zzz]</code></li>
+</ul>
+
+
+<div class="org-src-container">
+<pre class="src src-latex3">
+<span style="color: #721045;">\DeclareBibliographyDriver</span>{thesis} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\usebibmacro</span>{bibindex}
+    <span style="color: #721045;">\usebibmacro</span>{begentry} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+      <span style="color: #721045;">\usebibmacro</span>{author}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{title}
+      <span style="color: #721045;">\newunit</span>
+      <span style="color: #721045;">\printfield</span>{type}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printlist</span>{institution}
+      <span style="color: #721045;">\newunit</span>
+      <span style="color: #721045;">\printlist</span>{location}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printfield</span>{number}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printdate</span>
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\addperiod</span><span style="color: #005e8b;">\addspace</span>}<span style="color: #721045;">\newblock</span>
+      <span style="color: #721045;">\printfirst</span>{doi,eprint,url} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+    <span style="color: #721045;">\usebibmacro</span>{finentry}
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+</pre>
+</div>
+</div>
+
+<ol class="org-ol">
+<li><a id="org925c53a"></a>type<br />
+<div class="outline-text-5" id="text-2-8-7-1">
+<div class="org-src-container">
+<pre class="src src-latex3">phdthesis = Ph<span style="color: #721045;">\adddot</span> D<span style="color: #721045;">\adddot</span><span style="color: #005e8b;">\addspace</span> thesis,
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-orgd60c175" class="outline-4">
+<h4 id="orgd60c175"><span class="section-number-4">2.8.8.</span> <span class="todo TODO">TODO</span> manual</h4>
+<div class="outline-text-4" id="text-2-8-8">
+<p>
+<b>In JACoW Style Manual, it is a semicolon between the page number and the url.</b>
+</p>
+
+<p>
+Expected result:
+</p>
+<ul class="org-ul">
+<li><i>[Title]</i>, [organisation], [address], [date], p. [page]. <code>[url]</code></li>
+</ul>
+
+
+<div class="org-src-container">
+<pre class="src src-latex3">
+<span style="color: #721045;">\DeclareBibliographyDriver</span>{manual} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\usebibmacro</span>{bibindex}
+    <span style="color: #721045;">\usebibmacro</span>{begentry} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+      <span style="color: #721045;">\usebibmacro</span>{title}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printlist</span>{organization}
+      <span style="color: #721045;">\newunit</span>
+      <span style="color: #721045;">\printlist</span>{location}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printdate</span>
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printfield</span>{pages}
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\addperiod</span><span style="color: #005e8b;">\addspace</span>}<span style="color: #721045;">\newblock</span>
+      <span style="color: #721045;">\printfirst</span>{doi,eprint,url} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+    <span style="color: #721045;">\usebibmacro</span>{finentry}
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgce377f3" class="outline-4">
+<h4 id="orgce377f3"><span class="section-number-4">2.8.9.</span> patent</h4>
+<div class="outline-text-4" id="text-2-8-9">
+<p>
+Expected result:
+</p>
+<ul class="org-ul">
+<li>[Author], “[Title]”, [authority], No. [number], [date].</li>
+</ul>
+
+
+<div class="org-src-container">
+<pre class="src src-latex3">
+<span style="color: #721045;">\DeclareBibliographyDriver</span>{patent} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\usebibmacro</span>{bibindex}
+    <span style="color: #721045;">\usebibmacro</span>{begentry} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+      <span style="color: #721045;">\usebibmacro</span>{author}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\usebibmacro</span>{title}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printlist</span>{location}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printfield</span>{number}
+      <span style="color: #721045;">\newunit</span><span style="color: #005e8b;">\newblock</span>
+      <span style="color: #721045;">\printdate</span>
+      <span style="color: #721045;">\setunit</span>{<span style="color: #721045;">\addperiod</span><span style="color: #005e8b;">\addspace</span>}<span style="color: #721045;">\newblock</span>
+      <span style="color: #721045;">\printfirst</span>{doi,eprint,url} <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+    <span style="color: #721045;">\usebibmacro</span>{finentry}
+  } <span style="color: #7f0000; font-style: italic;">%&#187;</span>
+
+</pre>
+</div>
+</div>
+
+<ol class="org-ol">
+<li><a id="org15c738e"></a>No. [number]<br />
+<div class="outline-text-5" id="text-2-8-9-1">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\DeclareFieldFormat</span>[patent]{number}{No.<span style="color: #721045;">\nobreakspace</span>#1}
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org0b8db8a" class="outline-3">
+<h3 id="org0b8db8a"><span class="section-number-3">2.9.</span> Fields</h3>
+<div class="outline-text-3" id="text-2-9">
+</div>
+
+<div id="outline-container-org31a9cab" class="outline-4">
+<h4 id="org31a9cab"><span class="section-number-4">2.9.1.</span> <i>et al.</i></h4>
+<div class="outline-text-4" id="text-2-9-1">
+<p>
+The Latin expression of “and others” needs to be in italic:
+</p>
+<div class="org-src-container">
+<pre class="src src-latex3">andothers = <span style="color: #721045;">\mkbibemph</span>{et<span style="color: #721045;">\addabbrvspace</span> al<span style="color: #721045;">\adddot</span>},
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orged151b3" class="outline-4">
+<h4 id="orged151b3"><span class="section-number-4">2.9.2.</span> [title]</h4>
+<div class="outline-text-4" id="text-2-9-2">
+<p>
+All titles will be typeset with upright font wrapped in double quotation marks:
+</p>
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\DeclareFieldFormat</span>{title}{<span style="color: #721045;">\mkbibquote</span>{#1}}
+</pre>
+</div>
+<p>
+except the <code>book/manual</code> title, which is in italic:
+</p>
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\DeclareFieldFormat</span>[book,manual]{title}{<span style="color: #721045;">\mkbibemph</span>{#1}}
+</pre>
+</div>
+<p>
+and the <code>online</code> title, which does nothing:
+</p>
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\DeclareFieldFormat</span>[online]{title}{#1}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org461f033" class="outline-4">
+<h4 id="org461f033"><span class="section-number-4">2.9.3.</span> [maintitle]/[booktitle]</h4>
+<div class="outline-text-4" id="text-2-9-3">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\DeclareFieldFormat</span>{maintitle}{<span style="color: #721045;">\bibstring</span>{in}<span style="color: #721045;">\addspace</span><span style="color: #005e8b;">\mkbibemph</span>{#1}}
+<span style="color: #721045;">\DeclareFieldFormat</span>{booktitle}{<span style="color: #721045;">\bibstring</span>{in}<span style="color: #721045;">\addspace</span><span style="color: #005e8b;">\mkbibemph</span>{#1}}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org8c0fa95" class="outline-4">
+<h4 id="org8c0fa95"><span class="section-number-4">2.9.4.</span> paper [eid]</h4>
+<div class="outline-text-4" id="text-2-9-4">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\DeclareFieldFormat</span>{eid}{paper<span style="color: #721045;">\addspace</span>#1}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org38f82c3" class="outline-4">
+<h4 id="org38f82c3"><span class="section-number-4">2.9.5.</span> [doi]</h4>
+<div class="outline-text-4" id="text-2-9-5">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\DeclareFieldFormat</span>{doi}{<span style="color: #721045;">\doi</span>{#1}}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5339edb" class="outline-4">
+<h4 id="org5339edb"><span class="section-number-4">2.9.6.</span> [url]</h4>
+<div class="outline-text-4" id="text-2-9-6">
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\DeclareFieldFormat</span>{url}{<span style="color: #721045;">\url</span>{#1}}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc6fe52c" class="outline-3">
+<h3 id="orgc6fe52c"><span class="section-number-3">2.10.</span> Macros</h3>
+<div class="outline-text-3" id="text-2-10">
+<p>
+Print an empty unit to flush the punctuation buffer at the end of the entry. The reason why <code>\finentry</code> is not used here is that <code>\finentry</code> will always print <code>\finentrypunct</code> which is less flexible.
+</p>
+<div class="org-src-container">
+<pre class="src src-latex3"><span style="color: #721045;">\renewbibmacro</span>*{finentry} <span style="color: #7f0000; font-style: italic;">%&#171;</span>
+  {
+    <span style="color: #721045;">\blx@begunit</span>
+    <span style="color: #721045;">\blx@endunit</span>
+  }
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga40200a" class="outline-2">
+<h2 id="orga40200a"><span class="section-number-2">3.</span> Samples</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+
+<div id="outline-container-org625fe00" class="outline-3">
+<h3 id="org625fe00"><span class="section-number-3">3.1.</span> Conference</h3>
+<div class="outline-text-3" id="text-3-1">
+</div>
+<div id="outline-container-org1c0f5ad" class="outline-4">
+<h4 id="org1c0f5ad"><span class="section-number-4">3.1.1.</span> Published in previous proceedings</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<p>
+Five or less authors:
+</p>
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@inproceedings</span>{<span style="color: #0000b0;">klaproth:ipac2022-mopopt018</span>,
+  <span style="color: #005e8b;">author</span>       = {S. Klaproth and H. De Gersem and A. Penirschke and T. Reichert and R. Singh},
+  <span style="color: #005e8b;">title</span>        = {{Advancing to a GHz Transition Radiation Monitor for Longitudinal Charge Distribution Measurements}},
+  <span style="color: #005e8b;">booktitle</span>    = {Proc. IPAC'22},
+<span style="color: #7f0000; font-style: italic;">% booktitle    = {Proc. 13th International Particle Accelerator Conference (IPAC'22)},</span>
+  <span style="color: #005e8b;">pages</span>        = {267--270},
+  <span style="color: #005e8b;">eid</span>          = {MOPOPT018},
+  <span style="color: #005e8b;">language</span>     = {english},
+  <span style="color: #005e8b;">keywords</span>     = {vacuum, radiation, target, simulation, electron},
+  <span style="color: #005e8b;">venue</span>        = {Bangkok, Thailand},
+  <span style="color: #005e8b;">series</span>       = {International Particle Accelerator Conference},
+  <span style="color: #005e8b;">number</span>       = {13},
+  <span style="color: #005e8b;">publisher</span>    = {JACoW Publishing, Geneva, Switzerland},
+  <span style="color: #005e8b;">month</span>        = {07},
+  <span style="color: #005e8b;">year</span>         = {2022},
+  <span style="color: #005e8b;">issn</span>         = {2673-5490},
+  <span style="color: #005e8b;">isbn</span>         = {978-3-95450-227-1},
+  <span style="color: #005e8b;">doi</span>          = {doi:<span style="color: #3548cf; text-decoration: underline;">10.18429/JACoW-IPAC2022-MOPOPT018</span>},
+  <span style="color: #005e8b;">url</span>          = {<span style="color: #3548cf; text-decoration: underline;">https://jacow.org/ipac2022/papers/mopopt018.pdf</span>},
+  <span style="color: #005e8b;">abstract</span>     = {{In the past, longitudinal beam profiles have been measured with e.g., Feschenko monitors*, Fast Faraday Cups (FFC)** and field monitors. Feschenko monitors usually examine an average shape over several pulses and FFCs are interceptive devices by design. In this work we want to present the progress in the development of a novel GHz diffraction radiation monitor which shall be able to measure the longitudinal charge distribution of single bunches within Hadron beam LINACS non-destructively. A proof-of-concept measurement has been performed at GSI. We aim for a resolution of 50 to 100ps at beam energies of &#946;=0.05 to 0.74. electronic field simulations were performed using CST Particle Studio to determine an optimal RF-Window, which also suits as vacuum chamber and the beam energy and angular dependencies of the diffraction radiation for different materials were analyzed.}},
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@inproceedings</span>{<span style="color: #0000b0;">funakoshi:ipac2022-moplxgd1</span>,
+  <span style="color: #005e8b;">author</span>       = {Y. Funakoshi and T. Abe and K. Akai and Y. Arimoto and K. Egawa and S. Enomoto and H. Fukuma and K. Furukawa and N. Iida and H. Ikeda and T. Ishibashi and S.H. Iwabuchi and H. Kaji and T. Kamitani and T. Kawamoto and M. Kikuchi and T. Kobayashi and K. Kodama and H. Koiso and M. Masuzawa and K. Matsuoka and T. Mimashi and G. Mitsuka and F. Miyahara and T. Miyajima and T. Mori and A. Morita and S. Nakamura and T.T. Nakamura and K. Nakanishi and H.N. Nakayama and A. Natochii and M. Nishiwaki and S. Ogasawara and K. Ohmi and Y. Ohnishi and N. Ohuchi and K. Oide and T. Okada and T. Oki and M.A. Rehman and Y. Seimiya and K. Shibata and Y. Suetsugu and H. Sugimoto and H. Sugimura and M. Tawada and S. Terui and M. Tobiyama and R. Ueki and X. Wang and K. Watanabe and R.J. Yang and K. Yoshihara and S.I. Yoshimoto and T. Yoshimoto and D. Zhou and X. Zhou and Z.G. Zong},
+<span style="color: #7f0000; font-style: italic;">% author       = {Y. Funakoshi and T. Abe and K. Akai and Y. Arimoto and K. Egawa and S. Enomoto and others},</span>
+<span style="color: #7f0000; font-style: italic;">% author       = {Y. Funakoshi and others},</span>
+  <span style="color: #005e8b;">title</span>        = {{The SuperKEKB Has Broken the World Record of the Luminosity}},
+  <span style="color: #005e8b;">booktitle</span>    = {Proc. IPAC'22},
+<span style="color: #7f0000; font-style: italic;">% booktitle    = {Proc. 13th International Particle Accelerator Conference (IPAC'22)},</span>
+  <span style="color: #005e8b;">pages</span>        = {1--5},
+  <span style="color: #005e8b;">eid</span>          = {MOPLXGD1},
+  <span style="color: #005e8b;">language</span>     = {english},
+  <span style="color: #005e8b;">keywords</span>     = {luminosity, injection, impedance, simulation, operation},
+  <span style="color: #005e8b;">venue</span>        = {Bangkok, Thailand},
+  <span style="color: #005e8b;">series</span>       = {International Particle Accelerator Conference},
+  <span style="color: #005e8b;">number</span>       = {13},
+  <span style="color: #005e8b;">publisher</span>    = {JACoW Publishing, Geneva, Switzerland},
+  <span style="color: #005e8b;">month</span>        = {07},
+  <span style="color: #005e8b;">year</span>         = {2022},
+  <span style="color: #005e8b;">issn</span>         = {2673-5490},
+  <span style="color: #005e8b;">isbn</span>         = {978-3-95450-227-1},
+  <span style="color: #005e8b;">doi</span>          = {https://doi.org/<span style="color: #3548cf; text-decoration: underline;">10.18429/JACoW-IPAC2022-MOPLXGD1</span>},
+  <span style="color: #005e8b;">url</span>          = {<span style="color: #3548cf; text-decoration: underline;">https://jacow.org/ipac2022/papers/moplxgd1.pdf</span>},
+  <span style="color: #005e8b;">abstract</span>     = {{The SuperKEKB broke the world record of the luminosity in June 2020 in the Phase 3 operation. The luminosity has been increasing since then and the present highest luminosity is 4.65 x 10&#179;&#8308; cm&#8315;&#178;s&#8315;&#185; with &#946;_{y}^{*} of 1 mm. The increase of the luminosity was brought with an application of crab waist, by increasing beam currents and by other improvements in the specific luminosity. In this paper, we describe what we have achieved and what we are struggling with. Finally, we mention a future plan briefly.}},
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgf037d0b" class="outline-4">
+<h4 id="orgf037d0b"><span class="section-number-4">3.1.2.</span> Presented as a poster or slides only</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@unpublished</span>{<span style="color: #0000b0;">lin:ipac2022-moiygd2</span>,
+  <span style="color: #005e8b;">author</span>       = {C. Lin},
+  <span style="color: #005e8b;">title</span>        = {{Recent Progress of Compact LAser Plasma Accelerator at Peking University}},
+  <span style="color: #005e8b;">eventtitle</span>   = {IPAC'22},
+  <span style="color: #005e8b;">eid</span>          = {MOIYGD2},
+  <span style="color: #005e8b;">eventdate</span>    = {2022-07-12/2022-07-17},
+  <span style="color: #005e8b;">language</span>     = {english},
+  <span style="color: #005e8b;">type</span>         = {atevent},
+  <span style="color: #005e8b;">venue</span>        = {Bangkok, Thailand},
+  <span style="color: #005e8b;">abstract</span>     = {{Usually large energy spread and shot-to-shot stability are the bottlenecks of laser accelerator in applications. Recently proton beam with energies less than 10 MeV, &lt;1\% energy spread, several to tens of pC charge can be stably produced and transported in Compact LAser Plasma Accelerator (CLAPA) at Peking University. The CLAPA beam line is an object-image point analysing system, which ensures the transmission efficiency and energy selection accuracy for proton beams with initial large divergence angle and energy spread. A spread-out Bragg peak (SOBP) is produced with high precision beam control, which is essential for cancer therapy. Other primary application experiments based on laser-accelerated proton beam have also been carried out, such as FLASH irradiation, Laser Ion trace probe, proton radiograph, stress testing for tungsten, irradiation of semiconductor sensor to simulate the space irradiation environment and so on.}},
+}
+</pre>
+</div>
+
+<p>
+or
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@atconf</span>{<span style="color: #0000b0;">loisch:ipac2022-mooygd1</span>,
+  <span style="color: #005e8b;">author</span>       = {G. Loisch and J. Beinortaite and G.J. Boyle and J. Chappell and R.T.P. D&#8217;Arcy and S. Diederichs and B. Foster and J.M. Garland and P. Gonzalez-Caminal and C.A. Lindstr&#248;m and J. Osterhoff and T. Parikh and S. Schreiber and S. Schr&#246;der and M. Th&#233;venet and S. Wesch and M. Wing},
+<span style="color: #7f0000; font-style: italic;">% author       = {G. Loisch and J. Beinortaite and G.J. Boyle and J. Chappell and R.T.P. D&#8217;Arcy and S. Diederichs and others},</span>
+<span style="color: #7f0000; font-style: italic;">% author       = {G. Loisch and others},</span>
+  <span style="color: #005e8b;">title</span>        = {{Experiments Towards High-Repetition Rate Plasma Wakefield Acceleration at FLASHForward}},
+  <span style="color: #005e8b;">eventtitle</span>   = {IPAC'22},
+  <span style="color: #005e8b;">eid</span>          = {MOOYGD1},
+  <span style="color: #005e8b;">language</span>     = {english},
+  <span style="color: #005e8b;">venue</span>        = {Bangkok, Thailand},
+  <span style="color: #005e8b;">month</span>        = {07},
+  <span style="color: #005e8b;">year</span>         = {2022},
+  <span style="color: #005e8b;">abstract</span>     = {{Beam-driven plasma-wakefield acceleration (PWFA) is one of the most promising techniques to reduce significantly the size and cost of future lepton accelerators. Huge steps have been taken in the last decades towards achieving high acceleration gradients with simultaneous beam-quality preservation. However, in order to match both the luminosity demands of high-energy physics and the brilliance requirements of photon science, PWFA must be capable of accelerating thousands of bunches per second &#8217; orders of magnitude beyond the current state of the art. Historically, investigation of the rate limitation in plasmas was limited by the number of bunches available from the accelerator front-end. The FLASHForward facility, which is driven by the superconducting linac of the FLASH free-electron laser, is the first experiment capable of addressing this issue. We report here on first experimental results from the facility, aimed at determining the repetition rate limit of plasma accelerators arising from fundamental plasma processes* and finally advancing the repetition rate of PWFA from proof-of-principle experiments at a few bunches per second to a competitive plasma accelerator.}},
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org6d4e0ba" class="outline-4">
+<h4 id="org6d4e0ba"><span class="section-number-4">3.1.3.</span> Presented at this conference</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@unpublished</span>{<span style="color: #0000b0;">cook:ipac2022-mopopt067</span>,
+  <span style="color: #005e8b;">author</span>       = {N.M. Cook and G. Andonian and A. Diaw and C.C. Hall and N.P. Norvell and M. Yadav},
+  <span style="color: #005e8b;">title</span>        = {{Electron Beam Phase Space Reconstruction From a Gas Sheet Diagnostic}},
+  <span style="color: #005e8b;">eventtitle</span>   = {IPAC'22},
+  <span style="color: #005e8b;">type</span>         = {thisevent},
+<span style="color: #7f0000; font-style: italic;">% booktitle    = {Proc. 13th International Particle Accelerator Conference (IPAC'22)},</span>
+  <span style="color: #005e8b;">pages</span>        = {414--417},
+  <span style="color: #005e8b;">eid</span>          = {MOPOPT067},
+  <span style="color: #005e8b;">language</span>     = {english},
+  <span style="color: #005e8b;">keywords</span>     = {simulation, electron, diagnostics, network, experiment},
+  <span style="color: #005e8b;">venue</span>        = {Bangkok, Thailand},
+  <span style="color: #005e8b;">series</span>       = {International Particle Accelerator Conference},
+  <span style="color: #005e8b;">number</span>       = {13},
+  <span style="color: #005e8b;">publisher</span>    = {JACoW Publishing, Geneva, Switzerland},
+  <span style="color: #005e8b;">month</span>        = {07},
+  <span style="color: #005e8b;">year</span>         = {2022},
+  <span style="color: #005e8b;">issn</span>         = {2673-5490},
+  <span style="color: #005e8b;">isbn</span>         = {978-3-95450-227-1},
+  <span style="color: #005e8b;">doi</span>          = {<span style="color: #3548cf; text-decoration: underline;">10.18429/JACoW-IPAC2022-MOPOPT067</span>},
+  <span style="color: #005e8b;">url</span>          = {<span style="color: #3548cf; text-decoration: underline;">https://jacow.org/ipac2022/papers/mopopt067.pdf</span>},
+  <span style="color: #005e8b;">abstract</span>     = {{Next generation particle accelerators craft increasingly high brightness beams to achieve physics goals for applications ranging from colliders to free electron lasers to studies of nonperturbative QED. Such rigorous requirements on total charge and shape introduce diagnostic challenges for effectively measuring bunch parameters prior to or at interaction points. We report on the simulation and training of a non-destructive beam diagnostic capable of characterizing high intensity charged particle beams. The diagnostic consists of a tailored neutral gas curtain, electrostatic microscope, and high sensitivity camera. An incident electron beam ionizes the gas curtain, while the electrostatic microscope transports generated ions to an imaging screen. Simulations of the ionization and transport process are performed using the Warp code. Then, a neural network is trained to provide accurate estimates of the initial electron beam parameters. We present initial results for a range of beam and gas curtain parameters and comment on extensibility to other beam intensity regimes.}},
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@thisconf</span>{<span style="color: #0000b0;">edelen:ipac2022-moiysp1</span>,
+  <span style="color: #005e8b;">author</span>       = {A.L. Edelen},
+  <span style="color: #005e8b;">title</span>        = {{Machine Learning as a Tool for Online, Surrogate Modelling of Beam Dynamics}},
+  <span style="color: #005e8b;">eventtitle</span>   = {IPAC'22},
+  <span style="color: #005e8b;">eventdate</span>    = {2022-07-12/2022-07-17},
+  <span style="color: #005e8b;">language</span>     = {english},
+  <span style="color: #005e8b;">eid</span>          = {MOIYSP1},
+  <span style="color: #005e8b;">venue</span>        = {Bangkok, Thailand},
+  <span style="color: #005e8b;">note</span>         = {presented at IPAC'22 in Bangkok, Thailand, unpublished},
+  <span style="color: #005e8b;">abstract</span>     = {{The detailed design and optimization of accelerators has historically relied on high-fidelity simulations whose computational requirements limit their use as online tools. Recently, a growing community has begun reducing this computational burden by applying techniques from machine learning. For example, by learning from a sparse sampling of physics simulations one can develop fast-executing "surrogate models" that approximately predict accelerator performance for entirely new design parameters. Using these models can reduce compute times for multi-objective optimization studies by several orders of magnitude. In addition, surrogate models are now being applied in operational settings to enable non-invasive diagnostics and real-time optimization. This talk will cover developments in this field, applications to medium-energy electron photoinjectors, and how such surrogate models may improve our physics understanding of present and future accelerators.}},
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org0ce31c8" class="outline-3">
+<h3 id="org0ce31c8"><span class="section-number-3">3.2.</span> Journal</h3>
+<div class="outline-text-3" id="text-3-2">
+</div>
+<div id="outline-container-orgd7a6921" class="outline-4">
+<h4 id="orgd7a6921"><span class="section-number-4">3.2.1.</span> Published article</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@article</span>{<span style="color: #0000b0;">baker:nature-533-452</span>,
+  <span style="color: #005e8b;">author</span>       = {Baker, M.},
+  <span style="color: #005e8b;">title</span>        = {1,500 scientists lift the lid on reproducibility},
+  <span style="color: #005e8b;">journal</span>      = {Nature},
+  <span style="color: #005e8b;">volume</span>       = 533,
+  <span style="color: #005e8b;">pages</span>        = {452--454},
+  <span style="color: #005e8b;">year</span>         = 2016,
+  <span style="color: #005e8b;">doi</span>          = {<span style="color: #3548cf; text-decoration: underline;">10.1038/533452a</span>},
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@article</span>{<span style="color: #0000b0;">PhysRevSTAB.17.112801</span>,
+  <span style="color: #005e8b;">title</span> = {Beam position monitor design for a third generation light source},
+  <span style="color: #005e8b;">author</span> = {Chen, Zhichu and Leng, Yongbin and Ye, Kairong and Zhao, Guobi and Yuan, Renxian},
+  <span style="color: #005e8b;">journal</span> = {Phys. Rev. ST Accel. Beams},
+  <span style="color: #005e8b;">volume</span> = {17},
+  <span style="color: #005e8b;">issue</span> = {11},
+  <span style="color: #005e8b;">pages</span> = {112801},
+  <span style="color: #005e8b;">numpages</span> = {8},
+  <span style="color: #005e8b;">year</span> = {2014},
+  <span style="color: #005e8b;">month</span> = {Nov},
+  <span style="color: #005e8b;">publisher</span> = {American Physical Society},
+  <span style="color: #005e8b;">doi</span> = {<span style="color: #3548cf; text-decoration: underline;">10.1103/PhysRevSTAB.17.112801</span>},
+  <span style="color: #005e8b;">url</span> = {<span style="color: #3548cf; text-decoration: underline;">https://link.aps.org/doi/10.1103/PhysRevSTAB.17.112801</span>}
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@article</span>{<span style="color: #0000b0;">PhysRevSTAB.17.112803</span>,
+  <span style="color: #005e8b;">title</span> = {Wakefield measurement using principal component analysis on bunch-by-bunch information during transient state of injection in a storage ring},
+  <span style="color: #005e8b;">author</span> = {Chen, Zhichu and Yang, Yong and Leng, Yongbin and Yuan, Renxian},
+  <span style="color: #005e8b;">journal</span> = {Phys. Rev. ST Accel. Beams},
+  <span style="color: #005e8b;">volume</span> = {17},
+  <span style="color: #005e8b;">number</span> = {11},
+  <span style="color: #005e8b;">pages</span> = {112803},
+  <span style="color: #005e8b;">numpages</span> = {7},
+  <span style="color: #005e8b;">year</span> = {2014},
+  <span style="color: #005e8b;">month</span> = {Nov},
+  <span style="color: #005e8b;">publisher</span> = {American Physical Society},
+  <span style="color: #005e8b;">doi</span> = {<span style="color: #3548cf; text-decoration: underline;">10.1103/PhysRevSTAB.17.112803</span>},
+  <span style="color: #005e8b;">url</span> = {<span style="color: #3548cf; text-decoration: underline;">https://link.aps.org/doi/10.1103/PhysRevSTAB.17.112803</span>}
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org694dd37" class="outline-4">
+<h4 id="org694dd37"><span class="section-number-4">3.2.2.</span> Article accepted by a periodical</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@submittedto</span>{<span style="color: #0000b0;">chen:arxiv:1309.2353</span>,
+  <span style="color: #005e8b;">title</span> = {Experimental Study using {Touschek} Lifetime as Machine Status Flag in {SSRF}},
+  <span style="color: #005e8b;">author</span> = {Zhichu Chen and Yongbin Leng and Renxian Yuan and Yingbing Yan and Luyang Yu},
+  <span style="color: #005e8b;">journal</span> = {Chinese Physics C},
+  <span style="color: #005e8b;">doi</span> = {https://doi.org/<span style="color: #3548cf; text-decoration: underline;">10.48550/arXiv.1309.2353</span>},
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbc76229" class="outline-4">
+<h4 id="orgbc76229"><span class="section-number-4">3.2.3.</span> Article submitted to a periodical</h4>
+<div class="outline-text-4" id="text-3-2-3">
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@submitted</span>{<span style="color: #0000b0;">author:fake-paper</span>,
+  <span style="color: #005e8b;">title</span> = {Fake paper wrote by the six {Author} brothers},
+  <span style="color: #005e8b;">author</span> = {First Author and Second Author and Third Author and Fourth Author and Fifth Author and Sixth Author},
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org39a90b2" class="outline-4">
+<h4 id="org39a90b2"><span class="section-number-4">3.2.4.</span> Article not even submitted</h4>
+<div class="outline-text-4" id="text-3-2-4">
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@unpublished</span>{<span style="color: #0000b0;">author:fake-unfinished-paper</span>,
+  <span style="color: #005e8b;">title</span> = {Fake paper wrote by the seven {Author} brothers and still discussing},
+  <span style="color: #005e8b;">author</span> = {First Author and Second Author and Third Author and Fourth Author and Fifth Author and Sixth Author and Seventh Author},
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgabd953c" class="outline-3">
+<h3 id="orgabd953c"><span class="section-number-3">3.3.</span> Book</h3>
+<div class="outline-text-3" id="text-3-3">
+</div>
+<div id="outline-container-org30685ce" class="outline-4">
+<h4 id="org30685ce"><span class="section-number-4">3.3.1.</span> Chapter in book</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@inbook</span>{<span style="color: #0000b0;">forest:beam-dynamics:ch3</span>,
+  <span style="color: #005e8b;">author</span> = {&#201;tienne Forest},
+  <span style="color: #005e8b;">title</span> = {From the {Hamiltonian} to the map},
+  <span style="color: #005e8b;">booktitle</span> = {Beam Dynamics},
+  <span style="color: #005e8b;">editor</span> = {Nicolas Delerue and Alicia Hofler and Vasiliy Morozov and Marlene Turner and Philippe Piot and Toru Hara and Manuela Boscolo and Sam Posen},
+  <span style="color: #005e8b;">location</span> = {London},
+  <span style="color: #005e8b;">publisher</span> = {CRC Press},
+  <span style="color: #005e8b;">year</span> = 1998,
+  <span style="color: #005e8b;">pages</span> = {65-103},
+  <span style="color: #005e8b;">doi</span> = {<span style="color: #3548cf; text-decoration: underline;">10.1201/9781315138176</span>},
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org371cbca" class="outline-4">
+<h4 id="org371cbca"><span class="section-number-4">3.3.2.</span> A complete book</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@book</span>{<span style="color: #0000b0;">wiedemann:particle-accelerator-physics</span>,
+  <span style="color: #005e8b;">author</span> = {Helmut Wiedemann},
+  <span style="color: #005e8b;">title</span> = {Particle Accelerator Physics},
+  <span style="color: #005e8b;">publisher</span> = {Springer Cham},
+  <span style="color: #005e8b;">date</span> = {2015-07-28},
+  <span style="color: #005e8b;">doi</span> = {https://doi.org/<span style="color: #3548cf; text-decoration: underline;">10.1007/978-3-319-18317-6</span>},
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcf1bcb4" class="outline-3">
+<h3 id="orgcf1bcb4"><span class="section-number-3">3.4.</span> Report</h3>
+<div class="outline-text-3" id="text-3-4">
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@techreport</span>{<span style="color: #0000b0;">herr:cern-2014-009.157</span>,
+  <span style="color: #005e8b;">author</span> = {Werner Herr},
+  <span style="color: #005e8b;">title</span> = {Mathematical and Numerical Methods for Non-linear Beam Dynamics},
+  <span style="color: #005e8b;">institution</span> = {CERN},
+  <span style="color: #005e8b;">location</span> = {Geneva, Switzerland},
+  <span style="color: #005e8b;">number</span> = {CERN-2014-009.157},
+  <span style="color: #005e8b;">year</span> = 2016,
+  <span style="color: #005e8b;">doi</span> = {<span style="color: #3548cf; text-decoration: underline;">10.5170/CERN-2014-009.157</span>},
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org30e54b2" class="outline-3">
+<h3 id="org30e54b2"><span class="section-number-3">3.5.</span> Thesis</h3>
+<div class="outline-text-3" id="text-3-5">
+</div>
+<div id="outline-container-orga247b4a" class="outline-4">
+<h4 id="orga247b4a"><span class="section-number-4">3.5.1.</span> PhD thesis</h4>
+<div class="outline-text-4" id="text-3-5-1">
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@phdthesis</span>{<span style="color: #0000b0;">fol:cern-thesis-2021-261</span>,
+  <span style="color: #005e8b;">author</span> = {Elena Fol},
+  <span style="color: #005e8b;">title</span> = {Application of Machine Learning in Beam Optics Measurements and Corrections},
+  <span style="color: #005e8b;">school</span> = {Goethe University},
+  <span style="color: #005e8b;">location</span> = {Frankfurt},
+  <span style="color: #005e8b;">year</span> = 2021,
+  <span style="color: #005e8b;">url</span> = {<span style="color: #3548cf; text-decoration: underline;">https://cds.cern.ch/record/2799999?ln=en</span>},
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgabeacf5" class="outline-3">
+<h3 id="orgabeacf5"><span class="section-number-3">3.6.</span> Manual</h3>
+<div class="outline-text-3" id="text-3-6">
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@manual</span>{<span style="color: #0000b0;">ieee-style</span>,
+  <span style="color: #005e8b;">title</span> = {{IEEE} Editorial Style Manual},
+  <span style="color: #005e8b;">organization</span> = {IEEE Periodicals},
+  <span style="color: #005e8b;">location</span> = {Piscataway, NJ, USA},
+  <span style="color: #005e8b;">date</span> = {2014-10},
+  <span style="color: #005e8b;">pages</span> = {34--52},
+  <span style="color: #005e8b;">url</span> = {<span style="color: #3548cf; text-decoration: underline;">http://www.ieee.org/documents/style_manual.pdf</span>},
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb34e0a3" class="outline-3">
+<h3 id="orgb34e0a3"><span class="section-number-3">3.7.</span> Private communication</h3>
+<div class="outline-text-3" id="text-3-7">
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@private</span>{<span style="color: #0000b0;">fake-discussion</span>,
+  <span style="color: #005e8b;">author</span> = {Volker Reinhard Wolfgang Schaa},
+  <span style="color: #005e8b;">date</span> = {2024-01-01}
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7cd74a8" class="outline-3">
+<h3 id="org7cd74a8"><span class="section-number-3">3.8.</span> Patent</h3>
+<div class="outline-text-3" id="text-3-8">
+<div class="org-src-container">
+<pre class="src src-bibtex"><span style="color: #721045;">@patent</span>{<span style="color: #0000b0;">fake-patent</span>,
+  <span style="color: #005e8b;">author</span> = {Zhichu Chen},
+  <span style="color: #005e8b;">title</span> = {How to replace editors with Cylons (Cybernetic Lifeform Node)},
+  <span style="color: #005e8b;">location</span> = {JACoW Patent Authority},
+  <span style="color: #005e8b;">number</span> = {2020-0202},
+  <span style="color: #005e8b;">date</span> = {2020-02-01},
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0be0a80" class="outline-2">
+<h2 id="org0be0a80"><span class="section-number-2">4.</span> Reference</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+<a href="Refs/biblatex.pdf::1">BibLaTeX</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Zhichu Chen</p>
+<p class="date">Created: 2024-03-31 Sun 18:49</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

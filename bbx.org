@@ -1,0 +1,1313 @@
+#+TITLE: Bibliography Style for JACoW
+#+AUTHOR: Zhichu Chen
+
+#+STARTUP: show3levels
+
+#+EXPORT_FILE_NAME: index
+
+#+OPTIONS: html-style:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+#+HTML_HEAD: <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+
+* Configure
+
+** bbx
+:PROPERTIES:
+:header-args: :noweb tangle :tangle texmf/tex/latex/biblatex-jacow/jacow.bbx :mkdirp yes
+:END:
+
+#+begin_src latex3
+  %% <<copy-right>>
+
+  \ProvidesExplFile %«
+    {jacow.bbx}
+    {2024/03/21}
+    {0.01}
+    {JACoW biblatex bibliography style} %»
+
+  \RequireBibliographyStyle{numeric-comp}
+
+  <<ident>>
+
+  <<init>>
+
+  <<dm-fld>>
+
+  <<dm-entry>>
+
+  <<drv>>
+
+  \DeclareSourcemap %«
+    {
+      \maps[datatype=bibtex] %«
+        {
+          <<drv-sourcemap>>
+        } %»
+    } %»
+
+  <<fld>>
+
+  <<mac>>
+
+  \endinput
+#+end_src
+
+
+** cbx
+:PROPERTIES:
+:header-args: :noweb tangle :tangle texmf/tex/latex/biblatex-jacow/jacow.cbx :mkdirp yes
+:END:
+
+#+begin_src latex3
+  %% <<copy-right>>
+
+  \ProvidesExplFile %«
+    {jacow.cbx}
+    {2024/03/21}
+    {0.01}
+    {JACoW biblatex citation style} %»
+
+  \RequireCitationStyle{numeric-comp}
+#+end_src
+
+** lbx
+:PROPERTIES:
+:header-args: :noweb tangle :tangle texmf/tex/latex/biblatex-jacow/jacow.lbx :mkdirp yes
+:END:
+
+
+#+begin_src latex3
+  %% <<copy-right>>
+
+  \ProvidesExplFile %«
+    {jacow.lbx}
+    {2024/03/21}
+    {0.01}
+    {JACoW biblatex localisation style} %»
+
+  \InheritBibliographyExtras{english}
+
+  \DeclareBibliographyExtras %«
+    {
+      <<decl-bibextra>>
+    } %»
+
+  <<new-bibstring>>
+
+  \DefineBibliographyStrings{english} %«
+    {
+      <<def-bibstring>>
+    } %»
+
+  \DeclareBibliographyStrings %«
+    {
+      inherit      = {english},
+      <<decl-bibstring>>
+      september    = {{September}{Sep\adddot}},
+    } %»
+
+  \endinput
+#+end_src
+
+
+* JACoW biblatex style
+
+** Do not use US punctuation
+:PROPERTIES:
+:header-args: :noweb-ref decl-bibextra
+:END:
+
+#+begin_src latex3
+  \stdpunctuation
+#+end_src
+
+** Redefine how to print date
+:PROPERTIES:
+:header-args: :noweb-ref decl-bibextra
+:END:
+
+#+begin_src latex3
+  \newrobustcmd*{\mkdaterangejacow}[1] %«
+    {
+      \iffieldundef{#1year}
+        %%%% year not defined
+        {
+          \iffieldundef{#1endyear}
+            %%% endyear not defined
+            {}
+            %%% endyear defined, let's pretend year==endyear
+            {
+              \iffieldundef{#1month}
+                %% month not defined
+                {
+                  \iffieldundef{#1endmonth}
+                    % endmonth not defined
+                    {\printfield{#1endyear}}
+                    % endmonth defined, let's pretend month==endmonth
+                    {\mkbibmonth{\thefield{#1endmonth}}\space\printfield{#1endyear}} %»
+                }
+                %% month defined
+                {
+                  \iffieldundef{#1endmonth}
+                    % endmonth not defined, let's pretend month==endmonth
+                    {\mkbibmonth{\thefield{#1month}}\space\printfield{#1endyear}}
+                    % endmonth defined
+                    {
+                      \iffieldsequal{#1month}{#1endmonth}
+                        {\mkbibmonth{\thefield{#1month}}\space\printfield{#1endyear}}
+                        {\mkbibmonth{\thefield{#1month}}--\mkbibmonth{\thefield{#1endmonth}}\space\printfield{#1endyear}} %»
+                    } %»
+                } %»
+            } %»
+        }
+        %%%% year defined
+        {
+          \iffieldundef{#1endyear}
+            %%% endyear not defined, let's pretend year==endyear
+            {
+              \iffieldundef{#1month}
+                %% month not defined
+                {
+                  \iffieldundef{#1endmonth}
+                    % endmonth not defined
+                    {\printfield{#1year}}
+                    % endmonth defined, let's pretend month==endmonth
+                    {\mkbibmonth{\thefield{#1endmonth}}\space\printfield{#1year}} %»
+                }
+                %% month defined
+                {
+                  \iffieldundef{#1endmonth}
+                    % endmonth not defined, let's pretend month==endmonth
+                    {\mkbibmonth{\thefield{#1month}}\space\printfield{#1year}}
+                    % endmonth defined
+                    {
+                      \iffieldsequal{#1month}{#1endmonth}
+                        {\mkbibmonth{\thefield{#1month}}\space\printfield{#1year}}
+                        {\mkbibmonth{\thefield{#1month}}--\mkbibmonth{\thefield{#1endmonth}}\space\printfield{#1year}} %»
+                    } %»
+                } %»
+            }
+            %%% endyear defined
+            {
+              \iffieldsequal{#1year}{#1endyear}
+                {
+                  \iffieldundef{#1month}
+                    %% month not defined
+                    {
+                      \iffieldundef{#1endmonth}
+                        % endmonth not defined
+                        {\printfield{#1year}}
+                        % endmonth defined, let's pretend month==endmonth
+                        {\mkbibmonth{\thefield{#1endmonth}}\space\printfield{#1year}} %»
+                    }
+                    %% month defined
+                    {
+                      \iffieldundef{#1endmonth}
+                        % endmonth not defined, let's pretend month==endmonth
+                        {\mkbibmonth{\thefield{#1month}}\space\printfield{#1year}}
+                        % endmonth defined
+                        {
+                          \iffieldsequal{#1month}{#1endmonth}
+                            {\mkbibmonth{\thefield{#1month}}\space\printfield{#1year}}
+                            {\mkbibmonth{\thefield{#1month}}--\mkbibmonth{\thefield{#1endmonth}}\space\printfield{#1year}} %»
+                        } %»
+                    } %»
+                }
+                {
+                  \iffieldundef{#1month}
+                    %% month not defined
+                    {
+                      \printfield{#1year}--\printfield{#1endyear}
+                    }
+                    %% month defined
+                    {
+                      \iffieldundef{#1endmonth}
+                        % endmonth not defined
+                        {
+                          \printfield{#1year}--\printfield{#1endyear}
+                        }
+                        % endmonth defined
+                        {
+                          \mkbibmonth{\thefield{#1month}}\space\printfield{#1year}--\mkbibmonth{\thefield{#1endmonth}}\space\printfield{#1endyear}
+                        } %»
+                    } %»
+                } %»
+            } %»
+        } %»
+    }
+#+end_src
+
+#+begin_src latex3
+  \protected\csedef{blx@imc@printdate}     {\noexpand\csuse{mkdaterangejacow}{}}
+  \protected\csedef{blx@imc@printeventdate}{\noexpand\csuse{mkdaterangejacow}{event}}
+#+end_src
+
+** Place doi
+:PROPERTIES:
+:header-args: :noweb-ref decl-bibextra
+:END:
+
+#+begin_src latex3
+  \cs_new:Npn \put_doi:n #1
+  {
+    \ifvmode
+      \leavevmode
+    \fi
+    \unskip
+    \ifhmode
+      \predisplaypenalty     10000\relax
+      \postdisplaypenalty    10000\relax
+      \abovedisplayskip      -\baselineskip
+      \belowdisplayskip      -\baselineskip
+      \abovedisplayshortskip \abovedisplayskip
+      \belowdisplayshortskip \belowdisplayskip
+      $$
+      \global \dimen0=\dimexpr \predisplaysize -2em \relax
+      $$
+      \count0 \prevgraf
+      \advance  \count0 by -3
+      \advance  \count0 by -1
+      \prevgraf \count0
+    \fi
+    \noindent \kern \dimexpr \dimen0 - \@totalleftmargin \relax
+    \setbox0=\hbox{\space#1}%
+    \ifdim \dimexpr \hsize-\dimen0 \relax < \wd0
+      \newline
+    \else
+      \space
+    \fi
+    {#1}
+  }
+#+end_src
+
+#+begin_src latex3
+  \tl_new:N \l_doi_tl
+  \str_new:N \l_doi:_str
+  \str_new:N \l_doi_str
+  \str_new:N \l_prefix_str
+  \str_new:N \l_vol_str
+  \str_gset:Nn \l_doi:_str { doi: }
+  \DeclareDocumentCommand{\doi}{sd<>om}
+  {
+    \str_set:Nn \l_doi_str { #4 }
+    \IfBooleanTF {#1}
+    {
+      \IfValueTF{#2}
+      {
+        \str_case_e:nn { \str_foldcase:n { #2 } }
+        {
+          { jacow } { \str_set:Nn \l_doi_str {doi<jacow>[event&year]{paper}} }
+          { arxiv } { \str_set:Nn \l_doi_str {doi<arxiv>[2-digit-year&month]{paper}} }
+          { prl }   { \str_set:Nn \l_doi_str {doi<prl>[vol]{page} ~ where ~ the ~ first ~ two ~ digits ~ of ~ “page” ~ is ~ issue ~ number} }
+          { prab }  { \str_set:Nn \l_doi_str {doi<prab>[vol]{page} ~ where ~ the ~ first ~ two ~ digits ~ of ~ “page” ~ is ~ issue ~ number} }
+          { nima }  { \str_set:Nn \l_doi_str {doi<nima>[year]{page}} }
+          { ieee/access }  { \str_set:Nn \l_doi_str {doi<ieee/access>[year]{magicnumber}} }
+          { mpid/sensors } { \str_set:Nn \l_doi_str {doi<mpid/sensors>[vol&no]{page}} }
+        }
+        \str_concat:NNN \l_doi_str \c_backslash_str \l_doi_str
+      }
+      {
+        \str_concat:NNN \l_doi_str \l_doi:_str \l_doi_str
+      }
+    }
+    {
+      \regex_replace_once:NnN \l_http_doi_org_regex { \1 } \l_doi_str
+      \regex_replace_once:NnN \l_doi:_regex         { \1 } \l_doi_str
+      \IfValueT{#2}
+      {
+        \str_case_e:nn { \str_foldcase:n { #2 } }
+        {
+          { jacow }        { \str_set:Nn \l_prefix_str {10.18429/JACoW-}            \str_set:Nn \l_vol_str {#3-} }
+          { arxiv }        { \str_set:Nn \l_prefix_str {10.48550/arXiv.}            \str_set:Nn \l_vol_str {#3.} }
+          { prl }          { \str_set:Nn \l_prefix_str {10.1103/PhysRevLett.}       \str_set:Nn \l_vol_str {#3.} }
+          { prab }         { \str_set:Nn \l_prefix_str {10.1103/PhysRevAccelBeams.} \str_set:Nn \l_vol_str {#3.} }
+          { nima }         { \str_set:Nn \l_prefix_str {10.1016/j.nima.}            \str_set:Nn \l_vol_str {#3.} }
+          { ieee/access }  { \str_set:Nn \l_prefix_str {10.1109/ACCESS.}            \str_set:Nn \l_vol_str {#3.} }
+          { mpid/sensors } { \str_set:Nn \l_prefix_str {10.3390/s}                  \str_set:Nn \l_vol_str {#3}  }
+        }
+        \IfValueT{#3}
+        {
+          \str_concat:NNN \l_prefix_str \l_prefix_str \l_vol_str
+        }
+        \str_concat:NNN \l_doi_str \l_prefix_str \l_doi_str
+      }
+      \regex_replace_once:NnN \l_doi:jacow_regex         { \1 JACoW \c{str_uppercase:n} \cB\{ \3 \cE\}  } \l_doi_str
+      \str_concat:NNN \l_doi_str \l_doi:_str \l_doi_str
+    }
+    \put_doi:n { \tt \l_doi_str }
+  }
+#+end_src
+
+
+#+begin_src latex3
+  \regex_new:N \l_http_doi_org_regex
+  \regex_new:N \l_doi:_regex
+  \regex_new:N \l_doi:jacow_regex
+#+end_src
+
+#+begin_src latex3
+    \regex_set:Nn \l_http_doi_org_regex { \A .*doi.org/(10\.) }
+#+end_src
+
+#+begin_src latex3
+  \regex_set:Nn \l_doi:_regex { .*doi:\s*(10\.) }
+#+end_src
+
+#+begin_src latex3
+  \regex_set:Nn \l_doi:jacow_regex { (10.18429/)((?i)jacow)(.*) }
+#+end_src
+
+** Print first defined field
+:PROPERTIES:
+:header-args: :noweb-ref decl-bibextra
+:END:
+
+#+begin_src latex3
+  \NewDocumentCommand\printfirst{omo} %«
+    {
+      \clist_map_inline:nn {#2} %«
+        {
+          \iffieldundef{##1}
+            {}
+            {
+              \IfValueT{#1}{\printtext{#1}}
+              \printfield{##1}
+              \IfValueT{#3}{\printtext{#3}}
+              \clist_map_break:
+            } %»
+        } %»
+    } %»
+#+end_src
+
+
+#+begin_src latex3
+  \NewDocumentCommand\printfirstlist{omo} %«
+    {
+      \clist_map_inline:nn {#2} %«
+        {
+          \iffieldundef{##1}
+            {}
+            {
+              \IfValueT{#1}{\printtext{#1}}
+              \printlist{##1}
+              \IfValueT{#3}{\printtext{#3}}
+              \clist_map_break:
+            } %»
+        } %»
+    } %»
+#+end_src
+
+** Copyright©
+:PROPERTIES:
+:header-args: :noweb-ref copy-right
+:END:
+
+#+begin_src latex3
+  biblatex-jacow --- A biblatex implementation of the
+  «
+    JACoW bibliography style
+  »
+#+end_src
+
+** Identification
+:PROPERTIES:
+:header-args: :noweb-ref ident
+:END:
+
+** Initialisation
+:PROPERTIES:
+:header-args: :noweb-ref init
+:END:
+
+#+begin_src latex3
+  \renewcommand*\bibnamedash{\textemdash\textemdash}
+  \renewcommand*\intitlepunct{\addspace}
+  \renewcommand*\newunitpunct{\addcomma\addspace}
+#+end_src
+
+
+** Drivers
+:PROPERTIES:
+:header-args: :noweb-ref drv
+:END:
+
+
+*** inproceedings
+
+The expected result will look like this:
+- [Author], “[Paper title]”, in /[Proc. Event]/, [venue], [date], paper [eid]. p. [page]. =doi:10.[xxx/yyy/zzz]=
+- [Author], “[Paper title]”, in /[Proc. Event]/, [venue], [date], paper [eid]. pp. [pages]. =doi:10.[xxx/yyy/zzz]=
+
+#+begin_src latex3
+
+  \DeclareBibliographyDriver{inproceedings} %«
+    {
+      \usebibmacro{bibindex}
+      \usebibmacro{begentry} %«
+        \usebibmacro{author}
+        \setunit{\labelnamepunct}\newblock
+        \usebibmacro{title}
+        \newunit
+        \printfirst{maintitle,booktitle}
+        \newunit\newblock
+        \printfield{venue}
+        \newunit
+        \usebibmacro{eventdate/date/mon.year}
+        \newunit\newblock
+        \printfield{eid}
+        \newunit
+        \printfield{pages}
+        \setunit{\addperiod\addspace}\newblock
+        \printfirst{doi,eprint,url} %»
+      \usebibmacro{finentry}
+    } %»
+
+#+end_src
+
+
+
+**** [date]
+:PROPERTIES:
+:header-args: :noweb-ref mac
+:END:
+
+#+begin_src latex3 :noweb-ref mac
+  \newbibmacro*{eventdate/date/mon.year} %«
+    {
+      \iffieldundef{eventyear}
+        {
+          \usebibmacro{date}%
+        }
+        {
+          \usebibmacro{eventdate}
+        }%»
+    } %»
+#+end_src
+
+#+begin_src latex3
+  \renewbibmacro*{date}     {\printdate}
+  \newbibmacro*  {eventdate}{\printeventdate}
+#+end_src
+
+*** unpublished
+
+The expected result will look like this:
+- [Author], “[Paper title]”, presented at the [Event], [venue], [date], paper [eid], unpublished.
+- [Author], “[Paper title]”, presented at the [Event], [venue], [date], paper [eid], this conference.
+- [Author], “[Paper title]”, /[Journal]/, to be published.
+- [Author], “[Paper title]”, submitted for publication.
+- [Author], “[Paper title]”, unpublished.
+- [Author], private communication, [date].
+
+
+
+#+begin_src latex3
+
+  \DeclareBibliographyDriver{unpublished} %«
+    {
+      \usebibmacro{bibindex}
+      \usebibmacro{begentry} %«
+        \usebibmacro{author}
+        \setunit{\labelnamepunct}\newblock
+        \usebibmacro{title}
+        \newunit\newblock
+        \usebibmacro{event/journal}
+        \newunit\newblock
+        \printfield{eid}
+        \newunit\newblock
+        \usebibmacro{type}
+        \newunit\newblock
+        \usebibmacro{private+date}
+        \setunit{\addperiod\addspace}\newblock
+        \printfirst{doi,eprint,url} %»
+      \usebibmacro{finentry}
+    }  %»
+
+#+end_src
+
+#+begin_src latex3 :noweb-ref init
+  \clist_const:Nn \l_jacow_unpublished_types {atevent,atconf,thisevent,thisconf,submitted,submittedto,private}
+#+end_src
+
+
+#+begin_src latex3 :noweb-ref drv-sourcemap
+  \map %«
+    {
+      \step[typesource=atevent,   typetarget=unpublished,final]
+      \step[fieldset=type,        fieldvalue=atevent]
+    } %»
+  \map %«
+    {
+      \step[typesource=atconf,    typetarget=unpublished,final]
+      \step[fieldset=type,        fieldvalue=atevent]
+    } %»
+  \map %«
+    {
+      \step[typesource=thisevent, typetarget=unpublished,final]
+      \step[fieldset=type,        fieldvalue=thisevent]
+    } %»
+  \map %«
+    {
+      \step[typesource=thisconf,  typetarget=unpublished,final]
+      \step[fieldset=type,        fieldvalue=thisevent]
+    } %»
+  \map %«
+    {
+      \step[typesource=submitted, typetarget=unpublished,final]
+      \step[fieldset=type,        fieldvalue=submitted]
+    } %»
+  \map %«
+    {
+      \step[typesource=submittedto, typetarget=unpublished,final]
+      \step[fieldset=type,          fieldvalue=submittedto]
+    } %»
+  \map %«
+    {
+      \step[typesource=private,     typetarget=unpublished,final]
+      \step[fieldset=type,          fieldvalue=private]
+    } %»
+#+end_src
+
+
+
+**** Event or Journal
+
+#+begin_src latex3 :noweb-ref mac
+  \newbibmacro*{event/journal} %«
+    {
+      \iffieldundef{eventtitle}
+        {
+          \iffieldundef{journaltitle}
+            {}
+            {
+              \printfield{journaltitle}
+            } %»
+        }
+        {
+          \printtext{presented ~ at ~ the}\addspace
+          \printfield{eventtitle}
+          \newunit
+          \printfield{venue}
+          \newunit
+          \usebibmacro{eventdate/date/mon.year}
+        } %»
+    } %»
+#+end_src
+
+
+**** type
+
+#+begin_src latex3 :noweb-ref new-bibstring
+  \clist_map_inline:Nn %«
+    \l_jacow_unpublished_types
+    {
+      \NewBibliographyString{#1}
+    } %»
+#+end_src
+
+#+begin_src latex3 :noweb-ref def-bibstring
+  atevent     = unpublished,
+  atconf      = unpublished,
+  submitted   = submitted\addspace for\addspace publication,
+  submittedto = to\addspace be\addspace published,
+  thisevent   = this\addspace conference,
+  thisconf    = this\addspace conference,
+  private     = private\addspace communication,
+#+end_src
+
+#+begin_src latex3 :noweb-ref mac
+  \newbibmacro*{type} %«
+    {
+      \iffieldundef{type}
+        {
+          \ifbibstring{\thefield{entrytype}}
+            {\printtext{\bibstring{\thefield{entrytype}}}}
+            {
+              \iffieldundef{event}
+                {
+                  \iffieldundef{journal}
+                    {
+                      \printtext{unpublished}
+                    }
+                    {
+                      \printtext{to ~ be ~ published}
+                    } %»
+                }
+                {
+                  \printtext{unpublished}
+                } %»
+            } %»
+        }
+        {
+          \printfield{type}
+        } %»
+    } %»
+#+end_src
+
+**** Private communication date
+
+#+begin_src latex3 :noweb-ref mac
+  \newbibmacro*{private+date} %«
+    {
+      \iffieldequalstr{type}{private}
+        {\printdate}
+        {} %»
+    } %»
+#+end_src
+
+*** article
+
+Expected result will be like:
+- [Author], “[Paper title]”, /[Journal]/, vol. [volume], no. [issue], p. [page], [date]. =doi:10.[xxx/yyy/zzz]=
+- [Author], “[Paper title]”, /[Journal]/, vol. [volume], no. [issue], pp. [pages], [date]. =doi:10.[xxx/yyy/zzz]=
+
+
+#+begin_src latex3
+
+  \DeclareBibliographyDriver{article} %«
+    {
+      \usebibmacro{bibindex}
+      \usebibmacro{begentry} %«
+        \usebibmacro{author}
+        \newunit\newblock
+        \usebibmacro{title}
+        \newunit\newblock
+        \printfield{journaltitle}
+        \newunit\newblock
+        \printfield{volume}
+        \newunit
+        \printfirst{issue,number}
+        \newunit
+        \printfield{pages}
+        \newunit\newblock
+        \printdate
+        \setunit{\addperiod\addspace}\newblock
+        \printfirst{doi,eprint,url} %»
+      \usebibmacro{finentry}
+    } %»
+
+#+end_src
+
+**** vol. [volume]
+:PROPERTIES:
+:header-args: :noweb-ref fld
+:END:
+
+#+begin_src latex3
+  \DeclareFieldFormat[article,periodical]{volume}{\bibstring{volume}\nobreakspace#1}
+#+end_src
+
+**** no. [issue]
+:PROPERTIES:
+:header-args: :noweb-ref fld
+:END:
+
+#+begin_src latex3
+  \DeclareFieldFormat[article,periodical]{issue}{\bibstring{number}\nobreakspace#1}
+  \DeclareFieldFormat[article,periodical]{number}{\bibstring{number}\nobreakspace#1}
+#+end_src
+
+*** inbook
+
+Expected result:
+- [Author], “[Chapter title]”, in /[Book Title]/, [Editor] Ed. [Location]: [Publisher], [date], p. [page]. =doi:10.[xxx/yyy/zzz]=
+
+
+#+begin_src latex3
+
+  \DeclareBibliographyDriver{inbook} %«
+    {
+      \usebibmacro{bibindex}
+      \usebibmacro{begentry} %«
+        \usebibmacro{author}
+        \newunit\newblock
+        \usebibmacro{title}
+        \newunit
+        \printfirst{maintitle,booktitle}
+        \newunit\newblock
+        \usebibmacro{byeditor}
+        \setunit{\addperiod\addspace}\newblock
+        \usebibmacro{publisher+location+date}
+        \newunit\newblock
+        \printfield{pages}
+        \setunit{\addperiod\addspace}\newblock
+        \printfirst{doi,eprint,url} %»
+      \usebibmacro{finentry}
+    } %»
+
+#+end_src
+
+**** [Editor] Ed.
+
+#+begin_src latex3 :noweb-ref mac
+  \renewbibmacro*{byeditor} %«
+    {
+      \ifnameundef{editor}
+        {}
+        {
+          \printnames[byeditor]{editor}
+          \addspace
+          \usebibmacro{bytypestrg}{editor}{editor}
+        } %»
+    } %»
+#+end_src
+
+#+begin_src latex3 :noweb-ref def-bibstring
+  byeditor = Ed\adddot,
+#+end_src
+
+*** book
+
+Expected result:
+- [Author], /[Book Title]/. [Location]: [Publisher], [date]. =doi:10.[xxx/yyy/zzz]=
+
+
+#+begin_src latex3
+
+  \DeclareBibliographyDriver{book} %«
+    {
+      \usebibmacro{bibindex}
+      \usebibmacro{begentry} %«
+        \usebibmacro{author}
+        \newunit\newblock
+        \usebibmacro{title}
+        \setunit{\addperiod\addspace}\newblock
+        \usebibmacro{publisher+location+date}
+        \setunit{\addperiod\addspace}\newblock
+        \printfirst{doi,eprint,url} %»
+      \usebibmacro{finentry}
+    } %»
+
+#+end_src
+
+*** report
+
+Expected result:
+- [Author], “[Report title]”, [institute], [address], Rep. [number], [date]. =doi:10.[xxx/yyy/zzz]=
+
+#+begin_src latex3
+
+  \DeclareBibliographyDriver{report} %«
+    {
+      \usebibmacro{bibindex}
+      \usebibmacro{begentry} %«
+        \usebibmacro{author}
+        \newunit\newblock
+        \usebibmacro{title}
+        \newunit\newblock
+        \printlist{institution}
+        \newunit
+        \printlist{location}
+        \newunit\newblock
+        \printfield{type}
+        \setunit{\addspace}
+        \printfield{number}
+        \newunit\newblock
+        \printdate
+        \setunit{\addperiod\addspace}\newblock
+        \printfirst{doi,eprint,url} %»
+      \usebibmacro{finentry}
+    } %»
+
+#+end_src
+
+**** Rep. [number]
+
+#+begin_src latex3 :noweb-ref fld
+  \DeclareFieldFormat[report]{number}{#1}
+#+end_src
+
+
+#+begin_src latex3 :noweb-ref def-bibstring
+  techreport = Rep\adddot,
+#+end_src
+
+*** thesis
+
+Expected result:
+- [Author], “[Title of thesis]”, Ph.D. thesis, [Institute], [address], [date]. =doi:10.[xxx/yyy/zzz]=
+
+
+#+begin_src latex3
+
+  \DeclareBibliographyDriver{thesis} %«
+    {
+      \usebibmacro{bibindex}
+      \usebibmacro{begentry} %«
+        \usebibmacro{author}
+        \newunit\newblock
+        \usebibmacro{title}
+        \newunit
+        \printfield{type}
+        \newunit\newblock
+        \printlist{institution}
+        \newunit
+        \printlist{location}
+        \newunit\newblock
+        \printfield{number}
+        \newunit\newblock
+        \printdate
+        \setunit{\addperiod\addspace}\newblock
+        \printfirst{doi,eprint,url} %»
+      \usebibmacro{finentry}
+    } %»
+
+#+end_src
+
+**** type
+
+#+begin_src latex3 :noweb-ref def-bibstring
+  phdthesis = Ph\adddot D\adddot\addspace thesis,
+#+end_src
+
+*** TODO manual
+
+*In JACoW Style Manual, it is a semicolon between the page number and the url.*
+
+Expected result:
+- /[Title]/, [organisation], [address], [date], p. [page]. =[url]=
+
+
+#+begin_src latex3
+
+  \DeclareBibliographyDriver{manual} %«
+    {
+      \usebibmacro{bibindex}
+      \usebibmacro{begentry} %«
+        \usebibmacro{title}
+        \newunit\newblock
+        \printlist{organization}
+        \newunit
+        \printlist{location}
+        \newunit\newblock
+        \printdate
+        \newunit\newblock
+        \printfield{pages}
+        \setunit{\addperiod\addspace}\newblock
+        \printfirst{doi,eprint,url} %»
+      \usebibmacro{finentry}
+    } %»
+  
+#+end_src
+
+*** patent
+
+Expected result:
+- [Author], “[Title]”, [authority], No. [number], [date].
+
+
+#+begin_src latex3
+
+  \DeclareBibliographyDriver{patent} %«
+    {
+      \usebibmacro{bibindex}
+      \usebibmacro{begentry} %«
+        \usebibmacro{author}
+        \newunit\newblock
+        \usebibmacro{title}
+        \newunit\newblock
+        \printlist{location}
+        \newunit\newblock
+        \printfield{number}
+        \newunit\newblock
+        \printdate
+        \setunit{\addperiod\addspace}\newblock
+        \printfirst{doi,eprint,url} %»
+      \usebibmacro{finentry}
+    } %»
+
+#+end_src
+
+**** No. [number]
+
+#+begin_src latex3 :noweb-ref fld
+  \DeclareFieldFormat[patent]{number}{No.\nobreakspace#1}
+#+end_src
+
+** Fields
+:PROPERTIES:
+:header-args: :noweb-ref fld
+:END:
+
+*** /et al./
+
+The Latin expression of “and others” needs to be in italic:
+#+begin_src latex3 :noweb-ref def-bibstring
+  andothers = \mkbibemph{et\addabbrvspace al\adddot},
+#+end_src
+
+*** [title]
+
+All titles will be typeset with upright font wrapped in double quotation marks:
+#+begin_src latex3
+  \DeclareFieldFormat{title}{\mkbibquote{#1}}
+#+end_src
+except the =book/manual= title, which is in italic:
+#+begin_src latex3
+  \DeclareFieldFormat[book,manual]{title}{\mkbibemph{#1}}
+#+end_src
+and the =online= title, which does nothing:
+#+begin_src latex3
+  \DeclareFieldFormat[online]{title}{#1}
+#+end_src
+
+*** [maintitle]/[booktitle]
+
+#+begin_src latex3
+  \DeclareFieldFormat{maintitle}{\bibstring{in}\addspace\mkbibemph{#1}}
+  \DeclareFieldFormat{booktitle}{\bibstring{in}\addspace\mkbibemph{#1}}
+#+end_src
+
+
+*** paper [eid]
+
+#+begin_src latex3
+  \DeclareFieldFormat{eid}{paper\addspace#1}
+#+end_src
+
+*** [doi]
+
+#+begin_src latex3 :noweb-ref fld
+  \DeclareFieldFormat{doi}{\doi{#1}}
+#+end_src
+
+*** [url]
+
+#+begin_src latex3
+  \DeclareFieldFormat{url}{\url{#1}}
+#+end_src
+
+** Macros
+:PROPERTIES:
+:header-args: :noweb-ref mac
+:END:
+
+Print an empty unit to flush the punctuation buffer at the end of the entry. The reason why =\finentry= is not used here is that =\finentry= will always print =\finentrypunct= which is less flexible.
+#+begin_src latex3
+  \renewbibmacro*{finentry} %«
+    {
+      \blx@begunit
+      \blx@endunit
+    }
+#+end_src
+
+
+* Samples
+:PROPERTIES:
+:header-args: :noweb tangle :tangle texmf/bibtex/bib/biblatex-jacow/jacow-sample.bib :mkdirp yes
+:END:
+
+** Conference
+
+*** Published in previous proceedings
+
+Five or less authors:
+#+begin_src bibtex
+  @inproceedings{klaproth:ipac2022-mopopt018,
+    author       = {S. Klaproth and H. De Gersem and A. Penirschke and T. Reichert and R. Singh},
+    title        = {{Advancing to a GHz Transition Radiation Monitor for Longitudinal Charge Distribution Measurements}},
+    booktitle    = {Proc. IPAC'22},
+  % booktitle    = {Proc. 13th International Particle Accelerator Conference (IPAC'22)},
+    pages        = {267--270},
+    eid          = {MOPOPT018},
+    language     = {english},
+    keywords     = {vacuum, radiation, target, simulation, electron},
+    venue        = {Bangkok, Thailand},
+    series       = {International Particle Accelerator Conference},
+    number       = {13},
+    publisher    = {JACoW Publishing, Geneva, Switzerland},
+    month        = {07},
+    year         = {2022},
+    issn         = {2673-5490},
+    isbn         = {978-3-95450-227-1},
+    doi          = {doi:10.18429/JACoW-IPAC2022-MOPOPT018},
+    url          = {https://jacow.org/ipac2022/papers/mopopt018.pdf},
+    abstract     = {{In the past, longitudinal beam profiles have been measured with e.g., Feschenko monitors*, Fast Faraday Cups (FFC)** and field monitors. Feschenko monitors usually examine an average shape over several pulses and FFCs are interceptive devices by design. In this work we want to present the progress in the development of a novel GHz diffraction radiation monitor which shall be able to measure the longitudinal charge distribution of single bunches within Hadron beam LINACS non-destructively. A proof-of-concept measurement has been performed at GSI. We aim for a resolution of 50 to 100ps at beam energies of β=0.05 to 0.74. electronic field simulations were performed using CST Particle Studio to determine an optimal RF-Window, which also suits as vacuum chamber and the beam energy and angular dependencies of the diffraction radiation for different materials were analyzed.}},
+  }
+#+end_src
+
+#+begin_src bibtex
+  @inproceedings{funakoshi:ipac2022-moplxgd1,
+    author       = {Y. Funakoshi and T. Abe and K. Akai and Y. Arimoto and K. Egawa and S. Enomoto and H. Fukuma and K. Furukawa and N. Iida and H. Ikeda and T. Ishibashi and S.H. Iwabuchi and H. Kaji and T. Kamitani and T. Kawamoto and M. Kikuchi and T. Kobayashi and K. Kodama and H. Koiso and M. Masuzawa and K. Matsuoka and T. Mimashi and G. Mitsuka and F. Miyahara and T. Miyajima and T. Mori and A. Morita and S. Nakamura and T.T. Nakamura and K. Nakanishi and H.N. Nakayama and A. Natochii and M. Nishiwaki and S. Ogasawara and K. Ohmi and Y. Ohnishi and N. Ohuchi and K. Oide and T. Okada and T. Oki and M.A. Rehman and Y. Seimiya and K. Shibata and Y. Suetsugu and H. Sugimoto and H. Sugimura and M. Tawada and S. Terui and M. Tobiyama and R. Ueki and X. Wang and K. Watanabe and R.J. Yang and K. Yoshihara and S.I. Yoshimoto and T. Yoshimoto and D. Zhou and X. Zhou and Z.G. Zong},
+  % author       = {Y. Funakoshi and T. Abe and K. Akai and Y. Arimoto and K. Egawa and S. Enomoto and others},
+  % author       = {Y. Funakoshi and others},
+    title        = {{The SuperKEKB Has Broken the World Record of the Luminosity}},
+    booktitle    = {Proc. IPAC'22},
+  % booktitle    = {Proc. 13th International Particle Accelerator Conference (IPAC'22)},
+    pages        = {1--5},
+    eid          = {MOPLXGD1},
+    language     = {english},
+    keywords     = {luminosity, injection, impedance, simulation, operation},
+    venue        = {Bangkok, Thailand},
+    series       = {International Particle Accelerator Conference},
+    number       = {13},
+    publisher    = {JACoW Publishing, Geneva, Switzerland},
+    month        = {07},
+    year         = {2022},
+    issn         = {2673-5490},
+    isbn         = {978-3-95450-227-1},
+    doi          = {https://doi.org/10.18429/JACoW-IPAC2022-MOPLXGD1},
+    url          = {https://jacow.org/ipac2022/papers/moplxgd1.pdf},
+    abstract     = {{The SuperKEKB broke the world record of the luminosity in June 2020 in the Phase 3 operation. The luminosity has been increasing since then and the present highest luminosity is 4.65 x 10³⁴ cm⁻²s⁻¹ with β_{y}^{*} of 1 mm. The increase of the luminosity was brought with an application of crab waist, by increasing beam currents and by other improvements in the specific luminosity. In this paper, we describe what we have achieved and what we are struggling with. Finally, we mention a future plan briefly.}},
+  }
+#+end_src
+
+
+*** Presented as a poster or slides only
+
+#+begin_src bibtex
+  @unpublished{lin:ipac2022-moiygd2,
+    author       = {C. Lin},
+    title        = {{Recent Progress of Compact LAser Plasma Accelerator at Peking University}},
+    eventtitle   = {IPAC'22},
+    eid          = {MOIYGD2},
+    eventdate    = {2022-07-12/2022-07-17},
+    language     = {english},
+    type         = {atevent},
+    venue        = {Bangkok, Thailand},
+    abstract     = {{Usually large energy spread and shot-to-shot stability are the bottlenecks of laser accelerator in applications. Recently proton beam with energies less than 10 MeV, <1\% energy spread, several to tens of pC charge can be stably produced and transported in Compact LAser Plasma Accelerator (CLAPA) at Peking University. The CLAPA beam line is an object-image point analysing system, which ensures the transmission efficiency and energy selection accuracy for proton beams with initial large divergence angle and energy spread. A spread-out Bragg peak (SOBP) is produced with high precision beam control, which is essential for cancer therapy. Other primary application experiments based on laser-accelerated proton beam have also been carried out, such as FLASH irradiation, Laser Ion trace probe, proton radiograph, stress testing for tungsten, irradiation of semiconductor sensor to simulate the space irradiation environment and so on.}},
+  }
+#+end_src
+
+or
+
+#+begin_src bibtex
+  @atconf{loisch:ipac2022-mooygd1,
+    author       = {G. Loisch and J. Beinortaite and G.J. Boyle and J. Chappell and R.T.P. D’Arcy and S. Diederichs and B. Foster and J.M. Garland and P. Gonzalez-Caminal and C.A. Lindstrøm and J. Osterhoff and T. Parikh and S. Schreiber and S. Schröder and M. Thévenet and S. Wesch and M. Wing},
+  % author       = {G. Loisch and J. Beinortaite and G.J. Boyle and J. Chappell and R.T.P. D’Arcy and S. Diederichs and others},
+  % author       = {G. Loisch and others},
+    title        = {{Experiments Towards High-Repetition Rate Plasma Wakefield Acceleration at FLASHForward}},
+    eventtitle   = {IPAC'22},
+    eid          = {MOOYGD1},
+    language     = {english},
+    venue        = {Bangkok, Thailand},
+    month        = {07},
+    year         = {2022},
+    abstract     = {{Beam-driven plasma-wakefield acceleration (PWFA) is one of the most promising techniques to reduce significantly the size and cost of future lepton accelerators. Huge steps have been taken in the last decades towards achieving high acceleration gradients with simultaneous beam-quality preservation. However, in order to match both the luminosity demands of high-energy physics and the brilliance requirements of photon science, PWFA must be capable of accelerating thousands of bunches per second ’ orders of magnitude beyond the current state of the art. Historically, investigation of the rate limitation in plasmas was limited by the number of bunches available from the accelerator front-end. The FLASHForward facility, which is driven by the superconducting linac of the FLASH free-electron laser, is the first experiment capable of addressing this issue. We report here on first experimental results from the facility, aimed at determining the repetition rate limit of plasma accelerators arising from fundamental plasma processes* and finally advancing the repetition rate of PWFA from proof-of-principle experiments at a few bunches per second to a competitive plasma accelerator.}},
+  }
+#+end_src
+
+
+*** Presented at this conference
+
+#+begin_src bibtex
+  @unpublished{cook:ipac2022-mopopt067,
+    author       = {N.M. Cook and G. Andonian and A. Diaw and C.C. Hall and N.P. Norvell and M. Yadav},
+    title        = {{Electron Beam Phase Space Reconstruction From a Gas Sheet Diagnostic}},
+    eventtitle   = {IPAC'22},
+    type         = {thisevent},
+  % booktitle    = {Proc. 13th International Particle Accelerator Conference (IPAC'22)},
+    pages        = {414--417},
+    eid          = {MOPOPT067},
+    language     = {english},
+    keywords     = {simulation, electron, diagnostics, network, experiment},
+    venue        = {Bangkok, Thailand},
+    series       = {International Particle Accelerator Conference},
+    number       = {13},
+    publisher    = {JACoW Publishing, Geneva, Switzerland},
+    month        = {07},
+    year         = {2022},
+    issn         = {2673-5490},
+    isbn         = {978-3-95450-227-1},
+    doi          = {10.18429/JACoW-IPAC2022-MOPOPT067},
+    url          = {https://jacow.org/ipac2022/papers/mopopt067.pdf},
+    abstract     = {{Next generation particle accelerators craft increasingly high brightness beams to achieve physics goals for applications ranging from colliders to free electron lasers to studies of nonperturbative QED. Such rigorous requirements on total charge and shape introduce diagnostic challenges for effectively measuring bunch parameters prior to or at interaction points. We report on the simulation and training of a non-destructive beam diagnostic capable of characterizing high intensity charged particle beams. The diagnostic consists of a tailored neutral gas curtain, electrostatic microscope, and high sensitivity camera. An incident electron beam ionizes the gas curtain, while the electrostatic microscope transports generated ions to an imaging screen. Simulations of the ionization and transport process are performed using the Warp code. Then, a neural network is trained to provide accurate estimates of the initial electron beam parameters. We present initial results for a range of beam and gas curtain parameters and comment on extensibility to other beam intensity regimes.}},
+  }
+#+end_src
+
+#+begin_src bibtex
+  @thisconf{edelen:ipac2022-moiysp1,
+    author       = {A.L. Edelen},
+    title        = {{Machine Learning as a Tool for Online, Surrogate Modelling of Beam Dynamics}},
+    eventtitle   = {IPAC'22},
+    eventdate    = {2022-07-12/2022-07-17},
+    language     = {english},
+    eid          = {MOIYSP1},
+    venue        = {Bangkok, Thailand},
+    note         = {presented at IPAC'22 in Bangkok, Thailand, unpublished},
+    abstract     = {{The detailed design and optimization of accelerators has historically relied on high-fidelity simulations whose computational requirements limit their use as online tools. Recently, a growing community has begun reducing this computational burden by applying techniques from machine learning. For example, by learning from a sparse sampling of physics simulations one can develop fast-executing "surrogate models" that approximately predict accelerator performance for entirely new design parameters. Using these models can reduce compute times for multi-objective optimization studies by several orders of magnitude. In addition, surrogate models are now being applied in operational settings to enable non-invasive diagnostics and real-time optimization. This talk will cover developments in this field, applications to medium-energy electron photoinjectors, and how such surrogate models may improve our physics understanding of present and future accelerators.}},
+  }
+#+end_src
+
+
+
+** Journal
+
+*** Published article
+
+#+begin_src bibtex
+  @article{baker:nature-533-452,
+    author       = {Baker, M.},
+    title        = {1,500 scientists lift the lid on reproducibility},
+    journal      = {Nature},
+    volume       = 533,
+    pages        = {452--454},
+    year         = 2016,
+    doi          = {10.1038/533452a},
+  }
+#+end_src
+
+#+begin_src bibtex
+  @article{PhysRevSTAB.17.112801,
+    title = {Beam position monitor design for a third generation light source},
+    author = {Chen, Zhichu and Leng, Yongbin and Ye, Kairong and Zhao, Guobi and Yuan, Renxian},
+    journal = {Phys. Rev. ST Accel. Beams},
+    volume = {17},
+    issue = {11},
+    pages = {112801},
+    numpages = {8},
+    year = {2014},
+    month = {Nov},
+    publisher = {American Physical Society},
+    doi = {10.1103/PhysRevSTAB.17.112801},
+    url = {https://link.aps.org/doi/10.1103/PhysRevSTAB.17.112801}
+  }
+#+end_src
+
+#+begin_src bibtex
+  @article{PhysRevSTAB.17.112803,
+    title = {Wakefield measurement using principal component analysis on bunch-by-bunch information during transient state of injection in a storage ring},
+    author = {Chen, Zhichu and Yang, Yong and Leng, Yongbin and Yuan, Renxian},
+    journal = {Phys. Rev. ST Accel. Beams},
+    volume = {17},
+    number = {11},
+    pages = {112803},
+    numpages = {7},
+    year = {2014},
+    month = {Nov},
+    publisher = {American Physical Society},
+    doi = {10.1103/PhysRevSTAB.17.112803},
+    url = {https://link.aps.org/doi/10.1103/PhysRevSTAB.17.112803}
+  }
+#+end_src
+
+*** Article accepted by a periodical
+
+#+begin_src bibtex
+  @submittedto{chen:arxiv:1309.2353,
+    title = {Experimental Study using {Touschek} Lifetime as Machine Status Flag in {SSRF}},
+    author = {Zhichu Chen and Yongbin Leng and Renxian Yuan and Yingbing Yan and Luyang Yu},
+    journal = {Chinese Physics C},
+    doi = {https://doi.org/10.48550/arXiv.1309.2353},
+  }
+#+end_src
+
+*** Article submitted to a periodical
+
+#+begin_src bibtex
+  @submitted{author:fake-paper,
+    title = {Fake paper wrote by the six {Author} brothers},
+    author = {First Author and Second Author and Third Author and Fourth Author and Fifth Author and Sixth Author},
+  }
+#+end_src
+
+*** Article not even submitted
+
+#+begin_src bibtex
+  @unpublished{author:fake-unfinished-paper,
+    title = {Fake paper wrote by the seven {Author} brothers and still discussing},
+    author = {First Author and Second Author and Third Author and Fourth Author and Fifth Author and Sixth Author and Seventh Author},
+  }
+#+end_src
+
+** Book
+
+*** Chapter in book
+
+#+begin_src bibtex
+  @inbook{forest:beam-dynamics:ch3,
+    author = {Étienne Forest},
+    title = {From the {Hamiltonian} to the map},
+    booktitle = {Beam Dynamics},
+    editor = {Nicolas Delerue and Alicia Hofler and Vasiliy Morozov and Marlene Turner and Philippe Piot and Toru Hara and Manuela Boscolo and Sam Posen},
+    location = {London},
+    publisher = {CRC Press},
+    year = 1998,
+    pages = {65-103},
+    doi = {10.1201/9781315138176},
+  }
+#+end_src
+
+*** A complete book
+
+#+begin_src bibtex
+  @book{wiedemann:particle-accelerator-physics,
+    author = {Helmut Wiedemann},
+    title = {Particle Accelerator Physics},
+    publisher = {Springer Cham},
+    date = {2015-07-28},
+    doi = {https://doi.org/10.1007/978-3-319-18317-6},
+  }
+#+end_src
+
+** Report
+
+#+begin_src bibtex
+  @techreport{herr:cern-2014-009.157,
+    author = {Werner Herr},
+    title = {Mathematical and Numerical Methods for Non-linear Beam Dynamics},
+    institution = {CERN},
+    location = {Geneva, Switzerland},
+    number = {CERN-2014-009.157},
+    year = 2016,
+    doi = {10.5170/CERN-2014-009.157},
+  }
+#+end_src
+
+** Thesis
+
+*** PhD thesis
+
+#+begin_src bibtex
+  @phdthesis{fol:cern-thesis-2021-261,
+    author = {Elena Fol},
+    title = {Application of Machine Learning in Beam Optics Measurements and Corrections},
+    school = {Goethe University},
+    location = {Frankfurt},
+    year = 2021,
+    url = {https://cds.cern.ch/record/2799999?ln=en},
+  }
+#+end_src
+
+** Manual
+
+#+begin_src bibtex
+  @manual{ieee-style,
+    title = {{IEEE} Editorial Style Manual},
+    organization = {IEEE Periodicals},
+    location = {Piscataway, NJ, USA},
+    date = {2014-10},
+    pages = {34--52},
+    url = {http://www.ieee.org/documents/style_manual.pdf},
+  }
+#+end_src
+
+** Private communication
+
+#+begin_src bibtex
+  @private{fake-discussion,
+    author = {Volker Reinhard Wolfgang Schaa},
+    date = {2024-01-01}
+  }
+#+end_src
+
+** Patent
+
+#+begin_src bibtex
+  @patent{fake-patent,
+    author = {Zhichu Chen},
+    title = {How to replace editors with Cylons (Cybernetic Lifeform Node)},
+    location = {JACoW Patent Authority},
+    number = {2020-0202},
+    date = {2020-02-01},
+  }
+#+end_src
+
+* Reference
+
+[[pdfview:Refs/biblatex.pdf::1][BibLaTeX]]
+
